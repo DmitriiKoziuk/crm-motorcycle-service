@@ -1,5 +1,9 @@
+import { environment } from '../../../environments/environment';
+
 export class DebugService {
   static Log(message: any) {
-    console.log(message);
+    if (! environment.production) {
+      console.log(message);
+    }
   }
 }
