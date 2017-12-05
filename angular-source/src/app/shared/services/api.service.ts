@@ -26,7 +26,7 @@ export class ApiService {
 
   protected setUrl(url: string) {
     let urlString = '';
-    if (! environment.production) {
+    if (environment.production) {
       urlString = this.apiUrl + url;
     } else {
       urlString = this.apiUrl + url + '?XDEBUG_SESSION_START=debug';
