@@ -54,6 +54,11 @@ return [
                     'pluralize'   => false,
                     'controller' => 'v1/user'
                 ],
+                [
+                    'class'      => 'yii\rest\UrlRule',
+                    'pluralize'   => false,
+                    'controller' => 'v1/login'
+                ],
             ],
         ],
     ],
