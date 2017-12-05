@@ -13,11 +13,7 @@ export class UserService {
   constructor(private apiService: ApiService, private router: Router) { }
 
   isLoggedIn() {
-    if (this.data) {
-      return true;
-    } else {
-      return false;
-    }
+    return this.data;
   }
 
   login(username: string, password: string) {
@@ -25,6 +21,7 @@ export class UserService {
       'username': username,
       'password': password
     }).subscribe((data) => {
+      DebugService.Log(data);
       this.data             = new User();
       this.data.accessToken = data['access-token'];
       DebugService.Log(this.data);
