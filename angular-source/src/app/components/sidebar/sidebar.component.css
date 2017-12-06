@@ -1,0 +1,39 @@
+.sidebar {
+  width: 240px;
+  color: #797979;
+  background: #ffffff;
+  box-shadow: 0 0 24px 0 rgba(0, 0, 0, 0.06), 0 1px 0 0 rgba(0, 0, 0, 0.02);
+  position: absolute;
+  padding: 0;
+  height: 100vh;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar ul a {
+  color: rgba(49, 58, 70, 0.8);
+  display: block;
+  padding: 12px 20px;
+  margin: 2px 0;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.sidebar ul a.active {
+  color: #313a46 !important;
+  background-color: whitesmoke;
+}
+
+.sidebar ul a.icon {
+  display: inline-block;
+  font-size: 18px;
+  line-height: 17px;
+  margin: 0 10px 0 3px;
+  text-align: center;
+  vertical-align: middle;
+  width: 20px;
+}
