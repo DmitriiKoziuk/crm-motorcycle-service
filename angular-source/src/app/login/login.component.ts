@@ -9,6 +9,9 @@ import { UserService } from '../shared/services/user.service';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+
+  error: string|null = null;
+
   minLength = 5;
   maxLength = 10;
 
@@ -59,7 +62,7 @@ export class LoginComponent implements OnInit {
 
   submit() {
     if (this.loginForm.valid) {
-      this.userService.login(
+      this.error = this.userService.login(
         this.loginForm.get('username').value,
         this.loginForm.get('password').value
       );
