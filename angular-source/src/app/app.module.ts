@@ -24,7 +24,6 @@ import { UserService } from './shared/services/user.service';
     RouterModule,
     AppRoutingModule,
     HttpClientModule,
-    MaterialModule,
   ],
   providers: [
     DebugService,
