@@ -22,10 +22,17 @@ export class UserService {
       'password': password
     }).subscribe((data) => {
       DebugService.Log(data);
-      this.data             = new User();
-      this.data.accessToken = data['access-token'];
-      DebugService.Log(this.data);
-      this.router.navigate(['/']);
+      if (!data['error']) {
+        this.data             = new User();
+        this.data.accessToken = data['access-token'];
+        DebugService.Log(this.data);
+        this.router.navigate(['/']);
+        return null;
+      } else {
+        return data['error'];
+      }
     });
+
+    return null;
   }
 }
