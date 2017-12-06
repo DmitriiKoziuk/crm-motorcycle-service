@@ -1,6 +1,5 @@
-.login-wrapper {
-    max-width: 450px;
-    margin: 0 auto;
+.container {
+    min-width: 350px;
 }
 
 .login-form {
