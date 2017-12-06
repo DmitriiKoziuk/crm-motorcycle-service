@@ -7,3 +7,7 @@ html {
     padding-bottom: 0;
     min-height: 100px !important;
 }
+
+body {
+    margin: 0;
+}
