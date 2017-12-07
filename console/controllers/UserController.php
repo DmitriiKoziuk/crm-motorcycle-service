@@ -24,7 +24,7 @@ class UserController extends Controller
 
             return 0;
         } catch (\Exception $e) {
-            $this->stdout($e->getMessage(), Console::FG_RED);
+            $this->stdout($e->getMessage() . "\n", Console::FG_RED);
             return 1;
         }
     }
@@ -37,7 +37,7 @@ class UserController extends Controller
                 ->one();
 
             if (empty($user)) {
-                throw new \Exception("User with name '{$username}' do not exist.\n");
+                throw new \Exception("User with name '{$username}' do not exist.");
             }
 
             $user->delete();
@@ -45,7 +45,7 @@ class UserController extends Controller
             $this->stdout("User '{$username}' is deleted.\n", Console::FG_GREEN);
             return 0;
         } catch (\Exception $e) {
-            $this->stdout($e->getMessage(), Console::FG_RED);
+            $this->stdout($e->getMessage() . "\n", Console::FG_RED);
             return 1;
         }
     }
