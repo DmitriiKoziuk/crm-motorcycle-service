@@ -1,15 +1,13 @@
-<mat-sidenav-container class="sidebar">
-  <section>
-    <ul>
-      <li>
-        <a [routerLink]="['/']">
-          <fa name="info" class="icon"></fa>
-          <span>Main page</span>
-        </a>
-      </li>
-      <li>
-        <a [routerLink]="['/about']">About</a>
-      </li>
-    </ul>
-  </section>
-</mat-sidenav-container>
+<div class="sidebar">
+  <ul>
+    <li>
+      <a [routerLink]="['']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <fa name="desktop" class="icon"></fa>
+        <span>Main page</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="['/about']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">About</a>
+    </li>
+  </ul>
+</div>
