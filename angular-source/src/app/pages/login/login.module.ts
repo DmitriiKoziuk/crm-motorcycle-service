@@ -20,5 +20,6 @@ const loginRoutes: Routes = [
     RouterModule.forChild(loginRoutes),
     ReactiveFormsModule,
   ],
+  exports: [RouterModule]
 })
 export class LoginModule { }
