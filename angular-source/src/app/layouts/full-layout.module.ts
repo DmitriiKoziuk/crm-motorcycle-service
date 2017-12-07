@@ -6,6 +6,7 @@ import { MaterialModule } from '../shared/modules/material.module';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { HeaderComponent } from '../components/header/header.component';
 import { SidebarComponent } from '../components/sidebar/sidebar.component';
+import {CommonModule} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { SidebarComponent } from '../components/sidebar/sidebar.component';
     SidebarComponent,
   ],
   imports: [
+    CommonModule,
     MaterialModule,
     RouterModule,
     AngularFontAwesomeModule,
