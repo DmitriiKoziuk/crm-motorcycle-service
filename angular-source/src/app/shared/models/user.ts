@@ -1,3 +1,12 @@
 export class User {
-  accessToken: string;
+  id: number;
+  access_token: string;
+  username: string;
+  profile: {
+    firstName: string,
+    family_name: string,
+    middle_name: string,
+    photo: string,
+    telephone_number: string,
+  };
 }
