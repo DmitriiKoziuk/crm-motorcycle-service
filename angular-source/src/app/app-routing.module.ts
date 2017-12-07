@@ -12,6 +12,7 @@ const ROUTES: Routes = [
     component: FullLayoutComponent,
     children: [
       { path: 'about', component: AboutComponent },
+      { path: 'dashboard', loadChildren: './pages/dashboard/dashboard.module#DashboardModule' },
     ]
   },
   {
