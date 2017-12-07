@@ -1,5 +1,5 @@
 <?php
-namespace backend\models;
+namespace backend\modules\v1\models;
 
 use common\models\User as U;
 
