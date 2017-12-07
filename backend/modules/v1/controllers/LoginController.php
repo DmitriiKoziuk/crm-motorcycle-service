@@ -6,7 +6,8 @@ use yii\db\Exception;
 use yii\rest\Controller;
 use yii\filters\Cors;
 use backend\forms\LoginForm;
-use backend\models\User;
+use backend\modules\v1\models\User;
+use backend\modules\v1\answers\LoginAnswer;
 
 class LoginController extends Controller
 {
@@ -42,6 +43,7 @@ class LoginController extends Controller
 
             /** @var User $user */
             $user = User::find()
+                ->with(['profile'])
                 ->where([
                     'username' => $loginForm->username
                 ])->one();
@@ -52,9 +54,7 @@ class LoginController extends Controller
             if (! $user->validatePassword($loginForm->password))
                 throw new \Exception("Incorrect password");
 
-            $answer['message']      = "Hello {$user->username}";
-            $answer['access-token'] = $user->access_token;
-
+            $answer = LoginAnswer::get($user);
         } catch (\Exception $e) {
             $answer['error'] = $e->getMessage();
         }
