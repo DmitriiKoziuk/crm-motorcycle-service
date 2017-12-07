@@ -11,7 +11,7 @@ class LoginAnswer
             'message'      => "Hello {$user->username}",
             'id'           => $user->id,
             'username'     => $user->username,
-            'access-token' => $user->access_token,
+            'access_token' => $user->access_token,
             'profile'      => $user->profile,
         ];
     }
