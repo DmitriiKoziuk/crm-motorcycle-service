@@ -23,8 +23,8 @@ export class UserService {
     }).subscribe((data) => {
       DebugService.Log(data);
       if (!data['error']) {
-        this.data             = new User();
-        this.data.accessToken = data['access-token'];
+        this.data = new User();
+        this.data = <User>data;
         DebugService.Log(this.data);
         this.router.navigate(['/']);
         return null;
