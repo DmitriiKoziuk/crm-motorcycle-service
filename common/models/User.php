@@ -192,4 +192,33 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
+
+    public static function create($username, $email, $password) {
+        $isUserExist = static::find()
+            ->where([
+                'username' => $username
+            ])
+            ->one();
+
+        if (! empty($isUserExist)) {
+            throw new \Exception("User '{$username}' already exist");
+        }
+
+        $user           = new static();
+        $user->username = $username;
+        $user->email    = $email;
+        $user->setPassword($password);
+        $user->generateAuthKey();
+        $user->generateAccessToken();
+
+        if (! $user->validate()) {
+            throw new \Exception('Not valid data');
+        }
+
+        if (! $user->save()) {
+            throw new Exception("Can't save user");
+        }
+
+        return true;
+    }
 }
