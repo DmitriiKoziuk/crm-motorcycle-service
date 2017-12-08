@@ -1,9 +1,9 @@
 <?php
-namespace backend\modules\v1\answers;
+namespace backend\modules\v1\responses;
 
 use backend\modules\v1\models\User;
 
-class LoginAnswer
+class LoginResponse
 {
     public static function get(User $user)
     {
