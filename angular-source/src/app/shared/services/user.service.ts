@@ -51,6 +51,7 @@ export class UserService {
   checkStatus() {
     if (this.data) {
       this.apiService.post('login/check', {
+        'username': this.data.username,
         'access_token': this.data.access_token,
       }).subscribe((data) => {
         if (data['error']) {
