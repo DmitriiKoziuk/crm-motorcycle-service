@@ -7,6 +7,11 @@ use common\models\UserProfile;
 
 class LoginResponse extends Model
 {
+    public $id;
+    public $username;
+    public $access_token;
+    public $profile;
+
     public function rules()
     {
         return [
@@ -20,11 +25,6 @@ class LoginResponse extends Model
             }]
         ];
     }
-
-    public $id;
-    public $username;
-    public $access_token;
-    public $profile;
 
     public function loadData(User $user)
     {
