@@ -13,6 +13,7 @@ const ROUTES: Routes = [
     children: [
       { path: 'about', component: AboutComponent },
       { path: 'dashboard', loadChildren: './pages/dashboard/dashboard.module#DashboardModule' },
+      { path: 'user', loadChildren: './pages/user/user.module#UserModule' }
     ]
   },
   {
