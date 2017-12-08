@@ -26,7 +26,7 @@ class LoginResponse extends Model
         ];
     }
 
-    public function loadData(User $user)
+    public function setData(User $user)
     {
         $this->setAttributes($user->getAttributes());
         $this->profile = $user->profile;
@@ -34,7 +34,7 @@ class LoginResponse extends Model
         return $this;
     }
 
-    public function validateResponse()
+    public function validateData()
     {
         if (! $this->validate()) {
             throw new \Exception(json_encode($this->getErrors()));
