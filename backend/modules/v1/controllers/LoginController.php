@@ -2,13 +2,13 @@
 namespace backend\modules\v1\controllers;
 
 use Yii;
-use yii\db\Exception;
-use yii\db\Expression;
 use yii\rest\Controller;
 use yii\filters\Cors;
 use backend\modules\v1\models\User;
 use backend\modules\v1\requests\LoginRequest;
 use backend\modules\v1\responses\LoginResponse;
+use backend\modules\v1\requests\LoginCheckRequest;
+use backend\modules\v1\responses\LoginCheckResponse;
 
 class LoginController extends Controller
 {
@@ -53,29 +53,20 @@ class LoginController extends Controller
     public function actionCheck()
     {
         $answer = [];
+        $method = Yii::$app->getRequest()->getMethod();
 
-        try {
-            $accessToken = Yii::$app->getRequest()->getBodyParam('access_token');
-            $method      = Yii::$app->getRequest()->getMethod();
-
-            if ($method === 'POST') {
-                $user = User::find()
-                    ->where(
-                        ['access_token' => new Expression(':token')],
-                        [':token' => $accessToken]
-                    )
-                    ->one();
-
-                if (empty($user)) {
-                    throw new Exception("Access token not found");
-                }
+        if ($method === 'POST') {
+            try {
+                $request = (new LoginCheckRequest())
+                    ->setData(Yii::$app->getRequest()->getBodyParams())
+                    ->validateData();
+                $user    = User::checkLogin($request);
+                $answer  = new LoginCheckResponse([
+                    'message' => 'ok'
+                ]);
+            } catch (\Exception $e) {
+                $answer['error'] = $e->getMessage();
             }
-
-            $answer = [
-                'message' => 'ok'
-            ];
-        } catch (\Exception $e) {
-            $answer['error'] = $e->getMessage();
         }
 
         return $answer;
