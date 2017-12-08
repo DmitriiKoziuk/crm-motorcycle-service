@@ -33,7 +33,7 @@ class LoginController extends Controller
 
     public function actionCreate()
     {
-        $answer = [];
+        $response = [];
 
         try {
             $loginForm = new LoginForm();
@@ -56,12 +56,14 @@ class LoginController extends Controller
             if (! $user->validatePassword($loginForm->password))
                 throw new \Exception("Incorrect password");
 
-            $answer = LoginResponse::get($user);
+            $response = (new LoginResponse())
+                ->loadData($user)
+                ->validateResponse();
         } catch (\Exception $e) {
-            $answer['error'] = $e->getMessage();
+            $response['error'] = $e->getMessage();
         }
 
-        return $answer;
+        return $response;
     }
 
     public function actionCheck()
