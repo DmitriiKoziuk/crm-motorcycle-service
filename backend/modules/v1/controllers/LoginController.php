@@ -6,8 +6,8 @@ use yii\db\Exception;
 use yii\db\Expression;
 use yii\rest\Controller;
 use yii\filters\Cors;
-use backend\forms\LoginForm;
 use backend\modules\v1\models\User;
+use backend\modules\v1\requests\LoginRequest;
 use backend\modules\v1\responses\LoginResponse;
 
 class LoginController extends Controller
@@ -36,29 +36,13 @@ class LoginController extends Controller
         $response = [];
 
         try {
-            $loginForm = new LoginForm();
-            $loginForm->setAttributes(Yii::$app->getRequest()->getBodyParams());
-
-            if (! $loginForm->validate())
-                throw new \Exception("Username Or Password not valid");
-
-            /** @var User $user */
-            $user = User::find()
-                ->with(['profile'])
-                ->where(
-                    ['username' => new Expression(':username')],
-                    [':username' => $loginForm->username]
-                )->one();
-
-            if (empty($user))
-                throw new Exception("User '{$loginForm->username}' not found");
-
-            if (! $user->validatePassword($loginForm->password))
-                throw new \Exception("Incorrect password");
-
+            $request  = (new LoginRequest())
+                ->setData(Yii::$app->getRequest()->getBodyParams())
+                ->validateData();
+            $user     = User::login($request);
             $response = (new LoginResponse())
-                ->loadData($user)
-                ->validateResponse();
+                ->setData($user)
+                ->validateData();
         } catch (\Exception $e) {
             $response['error'] = $e->getMessage();
         }
