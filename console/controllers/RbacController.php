@@ -13,17 +13,16 @@ class RbacController extends Controller
     protected $roles = [
         ['name' => 'admin', 'description' => ''],
         ['name' => 'worker', 'description' => ''],
-        ['name' => 'manager', 'description' => ''],
     ];
 
     protected $permissions = [
         ['name' => 'login', 'description' => 'Can logged in.', 'children' => [
-                ['name' => 'canSeeOwnProfile', 'description' => 'User can see its own profile', 'children' => [
-                        ['name' => 'canEditOwnProfile', 'description' => 'User can edit self profile']
+                ['name' => 'seeOwnProfile', 'description' => 'User can see its own profile', 'children' => [
+                        ['name' => 'editOwnProfile', 'description' => 'User can edit self profile']
                     ]
                 ],
-                ['name' => 'canSeeUserControlPage', 'description' => 'See all users', 'children' => [
-                        ['name' => 'canEditUserProfile', 'description' => 'Can edit user data']
+                ['name' => 'seeUserControlPage', 'description' => 'See all users', 'children' => [
+                        ['name' => 'editUserProfile', 'description' => 'Can edit user data']
                     ]
                 ],
             ]
@@ -33,7 +32,7 @@ class RbacController extends Controller
     protected $assignRolesAndPermissions = [
         ['role' => 'admin', 'permissions' => 'all'],
         ['role' => 'worker', 'permissions' => [
-                'login', 'canSeeOwnProfile', 'canEditOwnProfile',
+                'login', 'seeOwnProfile', 'editOwnProfile',
             ]
         ]
     ];
