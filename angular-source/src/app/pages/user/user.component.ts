@@ -10,7 +10,7 @@ import { UserService } from '../../shared/services/user.service';
 })
 export class UserComponent implements OnInit {
   title            = 'Users control';
-  displayedColumns = ['id', 'photo', 'login', 'name', 'tel'];
+  displayedColumns = ['id', 'photo', 'role', 'login', 'name', 'tel'];
   dataSource;
 
   constructor(private userService: UserService) {}

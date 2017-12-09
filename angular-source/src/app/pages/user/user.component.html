@@ -25,6 +25,12 @@
           </ng-container>
 
           <!-- Weight Column -->
+          <ng-container matColumnDef="role">
+            <mat-header-cell *matHeaderCellDef> Role </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.role.name}} </mat-cell>
+          </ng-container>
+
+          <!-- Weight Column -->
           <ng-container matColumnDef="login">
             <mat-header-cell *matHeaderCellDef> Login </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.username}} </mat-cell>
