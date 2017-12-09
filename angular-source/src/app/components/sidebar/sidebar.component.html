@@ -1,16 +1,9 @@
 <div class="sidebar">
   <ul>
-    <li>
-      <a [routerLink]="['/dashboard']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-        <fa name="desktop" class="icon"></fa>
-        <span>Dashboard</span>
+    <li *ngFor="let link of links">
+      <a *ngIf="userService.can(link.permissionName)" [routerLink]="link.url" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <span>{{link.name}}</span>
       </a>
-    </li>
-    <li>
-      <a [routerLink]="['/user']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Users</a>
-    </li>
-    <li>
-      <a [routerLink]="['/about']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">About</a>
     </li>
   </ul>
 </div>
