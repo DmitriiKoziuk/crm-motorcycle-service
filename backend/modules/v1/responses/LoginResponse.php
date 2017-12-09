@@ -2,7 +2,7 @@
 namespace backend\modules\v1\responses;
 
 use yii\base\Model;
-use common\models\User;
+use backend\modules\v1\models\User;
 use common\models\UserProfile;
 
 class LoginResponse extends Model
@@ -11,6 +11,8 @@ class LoginResponse extends Model
     public $username;
     public $access_token;
     public $profile;
+    public $role;
+    public $permissions;
 
     public function rules()
     {
@@ -29,7 +31,9 @@ class LoginResponse extends Model
     public function setData(User $user)
     {
         $this->setAttributes($user->getAttributes());
-        $this->profile = $user->profile;
+        $this->profile     = $user->profile;
+        $this->role        = $user->getRole();
+        $this->permissions = $user->getPermissions();
 
         return $this;
     }
