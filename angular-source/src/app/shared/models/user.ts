@@ -3,7 +3,7 @@ export class User {
   access_token: string;
   username: string;
   profile: {
-    firstName: string,
+    first_name: string,
     family_name: string,
     middle_name: string,
     photo: string,
