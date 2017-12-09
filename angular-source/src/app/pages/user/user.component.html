@@ -6,7 +6,46 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      Content
+      <div class="example-container mat-elevation-z8">
+        <mat-table #table [dataSource]="dataSource">
+
+          <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="photo">
+            <mat-header-cell *matHeaderCellDef> Photo </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.profile.photo}} </mat-cell>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="login">
+            <mat-header-cell *matHeaderCellDef> Login </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.username}} </mat-cell>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef> Full Name </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.profile.first_name}} </mat-cell>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="tel">
+            <mat-header-cell *matHeaderCellDef> Telephone </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.profile.telephone_number}} </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      </div>
     </div>
   </div>
 </div>

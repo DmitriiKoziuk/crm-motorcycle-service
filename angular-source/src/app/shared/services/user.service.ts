@@ -17,6 +17,10 @@ export class UserService {
     }
   }
 
+  getAll() {
+    return this.apiService.get('user');
+  }
+
   isLoggedIn() {
     return this.data;
   }
