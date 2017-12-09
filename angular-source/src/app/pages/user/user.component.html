@@ -45,7 +45,7 @@
           <!-- Symbol Column -->
           <ng-container matColumnDef="tel">
             <mat-header-cell *matHeaderCellDef> Telephone </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.profile.telephone_number}} </mat-cell>
+            <mat-cell *matCellDef="let element"> {{element.profile.telephone_number | appTelephone}} </mat-cell>
           </ng-container>
 
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
