@@ -13,8 +13,12 @@ class UserController extends Controller
         echo 'Hello' . "\n";
     }
 
-    public function actionCreate($username, $email = 'someFakeUserEmail')
+    public function actionCreate($username, $email = null)
     {
+        if (empty($email)) {
+            $email = 'someFakeEmail' . rand(10, 10000);
+        }
+
         try {
             $password = Yii::$app->security->generateRandomString(10);
 
