@@ -7,11 +7,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 
 import { AppRoutingModule } from './app-routing.module';
-import { MaterialModule } from './shared/modules/material.module';
 
 import { DebugService } from './shared/services/debug.service';
 import { ApiService } from './shared/services/api.service';
 import { UserService } from './shared/services/user.service';
+import { AuthService } from './shared/services/auth.service';
 
 
 @NgModule({
@@ -29,6 +29,7 @@ import { UserService } from './shared/services/user.service';
     DebugService,
     ApiService,
     UserService,
+    AuthService
   ],
   bootstrap: [
     AppComponent
