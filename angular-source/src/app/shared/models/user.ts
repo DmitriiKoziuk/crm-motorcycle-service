@@ -9,4 +9,8 @@ export class User {
     photo: string,
     telephone_number: string,
   };
+  role: {
+    name: string,
+  };
+  permissions;
 }
