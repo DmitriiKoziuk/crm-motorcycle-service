@@ -1,14 +1,21 @@
 <?php
 namespace backend\modules\v1\models;
 
+use Yii;
 use yii\db\Exception;
 use yii\db\Expression;
+use yii\rbac\Permission;
 use common\models\User as U;
 use backend\modules\v1\requests\LoginRequest;
 use backend\modules\v1\requests\LoginCheckRequest;
 
 class User extends U
 {
+    /** @var Permission $role */
+    protected $role;
+    /** @var Permission[] $permissions */
+    protected $permissions;
+
     public static function login(LoginRequest $request)
     {
         /** @var User $user */
@@ -47,5 +54,27 @@ class User extends U
         }
 
         return $user;
+    }
+
+    public function getRole()
+    {
+        if (empty($this->role)) {
+            $roles      = Yii::$app->authManager->getRolesByUser($this->id);
+            $this->role = array_shift($roles);
+        }
+
+        return $this->role;
+    }
+
+    public function getPermissions()
+    {
+        if (empty($this->permissions)) {
+            $role = $this->getRole();
+            if (! empty($role)) {
+                $this->permissions = Yii::$app->authManager->getChildren($role->name);
+            }
+        }
+
+        return $this->permissions;
     }
 }
