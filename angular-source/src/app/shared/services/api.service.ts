@@ -1,27 +1,34 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { environment } from '../../../environments/environment';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class ApiService {
 
   protected apiUrl: string;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private authService: AuthService) {
     this.apiUrl = 'http://api.' + window.location.hostname + '/v1/';
   }
 
   get(url: string) {
-    return this.http.get(this.setUrl(url));
+    return this.http.get(this.setUrl(url), {
+      headers: new HttpHeaders().set('Authorization', `Bearer ${this.authService.getAccessToken()}`),
+    });
   }
 
   post(url: string, data: {}) {
-    return this.http.post(this.setUrl(url), data);
+    return this.http.post(this.setUrl(url), data, {
+      headers: new HttpHeaders().set('Authorization', `Bearer ${this.authService.getAccessToken()}`),
+    });
   }
 
   put(url: string, data: {}) {
-    return this.http.put(this.setUrl(url), data);
+    return this.http.put(this.setUrl(url), data, {
+      headers: new HttpHeaders().set('Authorization', `Bearer ${this.authService.getAccessToken()}`),
+    });
   }
 
   protected setUrl(url: string) {
