@@ -218,7 +218,8 @@ class RbacController extends Controller
             if (empty($user))
                 throw new \Exception("User '{$userName}' do not exist");
 
-            Yii::$app->authManager->revokeAll($user->id);
+            if (! Yii::$app->authManager->revokeAll($user->id))
+                throw new \Exception("Can`t remove role from '{$userName}'.");
 
             $this->stdout("Done. \n", Console::FG_GREEN);
             return 0;
