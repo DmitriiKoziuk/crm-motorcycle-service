@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {RouterModule, Routes} from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { UserComponent } from './user.component';
+import { MaterialModule } from '../../shared/modules/material.module';
 
 const ROUTES: Routes = [
   {path: '', component: UserComponent}
@@ -14,7 +15,8 @@ const ROUTES: Routes = [
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(ROUTES)
+    RouterModule.forChild(ROUTES),
+    MaterialModule
   ],
   exports: [
     RouterModule
