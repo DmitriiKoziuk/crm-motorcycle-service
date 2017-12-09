@@ -18,6 +18,10 @@ export class UserService {
     }
   }
 
+  can(permissionName) {
+    return this.data.permissions.hasOwnProperty(permissionName);
+  }
+
   getAll() {
     return this.apiService.get('user');
   }
