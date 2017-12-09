@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ApiService } from './api.service';
 import { User } from '../models/user';
 import { DebugService } from './debug.service';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class UserService {
@@ -11,7 +12,7 @@ export class UserService {
   private data: User|null = null;
   private storageName     = 'userData';
 
-  constructor(private apiService: ApiService, private router: Router) {
+  constructor(private apiService: ApiService, private router: Router, private authService: AuthService) {
     if (window.localStorage.getItem(this.storageName)) {
       this.loadFromLocalStorage();
     }
@@ -34,6 +35,7 @@ export class UserService {
       if (!data['error']) {
         this.data = new User();
         this.data = <User>data;
+        this.authService.setAccessToken(this.data.access_token);
         this.saveToLocalStorage();
         DebugService.Log(this.data);
         this.router.navigate(['/']);
@@ -73,6 +75,7 @@ export class UserService {
   protected loadFromLocalStorage() {
     if (window.localStorage.getItem(this.storageName)) {
       this.data = JSON.parse(window.localStorage.getItem(this.storageName));
+      this.authService.setAccessToken(this.data.access_token);
       this.checkStatus();
     }
   }
