@@ -1,17 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AboutComponent } from './pages/about/about.component';
 import { FullLayoutComponent } from './layouts/full-layout.component';
 import { SimpleLayoutComponent } from './layouts/simple-layout.component';
-import {FullLayoutModule} from './layouts/full-layout.module';
+import { FullLayoutModule } from './layouts/full-layout.module';
 
 const ROUTES: Routes = [
   {
     path: '',
     component: FullLayoutComponent,
     children: [
-      { path: 'about', component: AboutComponent },
       { path: 'dashboard', loadChildren: './pages/dashboard/dashboard.module#DashboardModule' },
       { path: 'user', loadChildren: './pages/user/user.module#UserModule' }
     ]
@@ -28,7 +26,6 @@ const ROUTES: Routes = [
 @NgModule({
   declarations: [
     SimpleLayoutComponent,
-    AboutComponent,
   ],
   imports: [
     RouterModule.forRoot(ROUTES),
