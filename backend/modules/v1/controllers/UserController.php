@@ -5,6 +5,7 @@ use yii\rest\Controller;
 use yii\filters\Cors;
 use yii\filters\auth\HttpBearerAuth;
 use backend\modules\v1\models\User;
+use backend\modules\v1\responses\UserGetResponse;
 
 class UserController extends Controller
 {
@@ -12,7 +13,7 @@ class UserController extends Controller
     {
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
-            'class' => HttpBearerAuth::className(),
+            'class'  => HttpBearerAuth::className(),
             'except' => ['options'],
         ];
         $behaviors['corsFilter'] = [
@@ -33,17 +34,14 @@ class UserController extends Controller
 
     public function actionIndex()
     {
-        $data = [];
-        /** @var User[] $users */
-        $users = User::find()
+        $users    = User::find()
             ->with(['profile'])
             ->all();
+        $response = (new UserGetResponse())
+            ->setData($users)
+            ->validateData()
+            ->getResponse();
 
-        foreach ($users as $key => $user) {
-            $data[ $key ] = $user->getAttributes();
-            $data[ $key ]['profile'] = $user->profile;
-        }
-
-        return $data;
+        return $response;
     }
 }
