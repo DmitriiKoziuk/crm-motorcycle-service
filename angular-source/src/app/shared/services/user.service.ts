@@ -26,6 +26,11 @@ export class UserService {
     return this.apiService.get('user');
   }
 
+  // TODO load profile from this.data if same id
+  getUser(id) {
+    return this.apiService.get(`user/${id}`);
+  }
+
   isLoggedIn() {
     return this.data;
   }
