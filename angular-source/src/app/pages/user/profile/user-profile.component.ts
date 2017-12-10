@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { UserService } from '../../../shared/services/user.service';
 import { User } from '../../../shared/models/user';
+import { Role } from '../../../shared/models/role';
+
+import { UserService } from '../../../shared/services/user.service';
 import { EmptyUser } from '../../../shared/models/empty-user';
 import { RoleService } from '../../../shared/services/role.service';
 
@@ -25,11 +27,11 @@ export class UserProfileComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.user = new EmptyUser();
-
+    this.user  = new EmptyUser();
     this.roles = [];
+
     this.roleService.getAll().subscribe((data) => {
-      this.roles = data;
+      this.roles = <Role[]>data;
     });
 
     this.form = new FormGroup({
