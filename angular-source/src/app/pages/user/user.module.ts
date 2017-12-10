@@ -1,24 +1,19 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
-import { UserComponent } from './user.component';
-import { MaterialModule } from '../../shared/modules/material.module';
-import { TelephonePipe } from '../../shared/pipes/telephone.pipe';
+import { UserListComponent } from './list/user-list.component';
+import { UserListModule } from './list/user-list.module';
 
 const ROUTES: Routes = [
-  {path: '', component: UserComponent}
+  {path: '', component: UserListComponent},
+  {path: ':id', loadChildren: './profile/user-profile.module#UserProfileModule'}
 ];
 
 @NgModule({
-  declarations: [
-    UserComponent,
-    TelephonePipe,
-  ],
+  declarations: [],
   imports: [
-    CommonModule,
     RouterModule.forChild(ROUTES),
-    MaterialModule
+    UserListModule,
   ],
   exports: [
     RouterModule
