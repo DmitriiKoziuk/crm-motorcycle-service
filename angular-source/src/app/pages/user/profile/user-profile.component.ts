@@ -18,7 +18,7 @@ export class UserProfileComponent implements OnInit {
   title = 'Edit user';
   user: User;
   form: FormGroup;
-  roles;
+  roles: Role[];
 
   constructor(
     private userService: UserService,
