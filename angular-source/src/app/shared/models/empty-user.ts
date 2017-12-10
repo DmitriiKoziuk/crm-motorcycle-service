@@ -13,7 +13,7 @@ export class EmptyUser extends User {
     telephone_number: '',
   };
 
-  role: {
+  role = {
     name: '',
   };
 
