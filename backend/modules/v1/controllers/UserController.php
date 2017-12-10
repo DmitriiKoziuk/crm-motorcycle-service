@@ -6,6 +6,7 @@ use yii\filters\Cors;
 use yii\filters\auth\HttpBearerAuth;
 use backend\modules\v1\models\User;
 use backend\modules\v1\responses\UserGetResponse;
+use backend\modules\v1\responses\UserResponse;
 
 class UserController extends Controller
 {
@@ -41,6 +42,21 @@ class UserController extends Controller
             ->setData($users)
             ->validateData()
             ->getResponse();
+
+        return $response;
+    }
+
+    public function actionView($id)
+    {
+        $response = [];
+
+        try {
+            $response = (new UserResponse())
+                ->setData(User::getById($id))
+                ->validateData();
+        } catch (\Exception $e) {
+            $response['error'] = $e->getMessage();
+        }
 
         return $response;
     }
