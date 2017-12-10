@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { UserService } from '../../../shared/services/user.service';
 import { User } from '../../../shared/models/user';
@@ -32,14 +32,25 @@ export class UserProfileComponent implements OnInit {
     });
 
     this.form = new FormGroup({
-      username: new FormControl(''),
-      password: new FormControl(''),
-      role:     new FormControl(''),
+      username: new FormControl('', [
+        Validators.required
+      ]),
+      password: new FormControl('', [
+        Validators.minLength(5),
+        Validators.maxLength(10),
+      ]),
+      role:     new FormControl('', [
+        Validators.required
+      ]),
       profile:  new FormGroup({
-        first_name:       new FormControl(''),
+        first_name:       new FormControl('', [
+          Validators.required
+        ]),
         family_name:      new FormControl(''),
         middle_name:      new FormControl(''),
-        telephone_number: new FormControl(''),
+        telephone_number: new FormControl('', [
+          Validators.required
+        ]),
       }),
     });
 
