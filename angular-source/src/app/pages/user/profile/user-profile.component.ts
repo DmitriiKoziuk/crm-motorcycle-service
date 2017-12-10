@@ -27,6 +27,7 @@ export class UserProfileComponent implements OnInit {
   ngOnInit() {
     this.user = new EmptyUser();
 
+    this.roles = [];
     this.roleService.getAll().subscribe((data) => {
       this.roles = data;
     });
