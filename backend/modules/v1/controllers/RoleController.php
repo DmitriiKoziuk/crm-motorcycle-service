@@ -5,6 +5,7 @@ use yii\rest\Controller;
 use yii\filters\Cors;
 use yii\filters\auth\HttpBearerAuth;
 use backend\modules\v1\models\Role;
+use backend\modules\v1\responses\RoleListResponse;
 
 class RoleController extends Controller
 {
@@ -33,6 +34,17 @@ class RoleController extends Controller
 
     public function actionIndex()
     {
-        return $roles = Role::getAll();
+        $response = [];
+
+        try {
+            $response = (new RoleListResponse())
+                ->setData(Role::getAll())
+                ->validateData()
+                ->getResponse();
+        } catch (\Exception $e) {
+            $response['error'] = $e->getMessage();
+        }
+
+        return $response;
     }
 }
