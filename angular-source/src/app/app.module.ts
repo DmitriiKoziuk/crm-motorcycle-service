@@ -12,6 +12,7 @@ import { DebugService } from './shared/services/debug.service';
 import { ApiService } from './shared/services/api.service';
 import { UserService } from './shared/services/user.service';
 import { AuthService } from './shared/services/auth.service';
+import { RoleService } from './shared/services/role.service';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { AuthService } from './shared/services/auth.service';
     DebugService,
     ApiService,
     UserService,
-    AuthService
+    AuthService,
+    RoleService,
   ],
   bootstrap: [
     AppComponent

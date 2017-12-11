@@ -5,7 +5,7 @@ use yii\base\Model;
 use backend\modules\v1\models\User;
 use common\models\UserProfile;
 
-class LoginResponse extends Model
+class UserResponse extends Model
 {
     public $id;
     public $username;

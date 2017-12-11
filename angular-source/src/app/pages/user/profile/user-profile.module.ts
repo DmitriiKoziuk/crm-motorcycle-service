@@ -1,6 +1,10 @@
 import { NgModule } from '@angular/core';
-import { UserProfileComponent } from './user-profile.component';
+import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { UserProfileComponent } from './user-profile.component';
+import { MaterialModule } from '../../../shared/modules/material.module';
 
 const ROUTES: Routes = [
   {path: '', component: UserProfileComponent},
@@ -10,7 +14,15 @@ const ROUTES: Routes = [
   declarations: [
     UserProfileComponent
   ],
-  imports: [RouterModule.forChild(ROUTES)],
-  exports: [RouterModule],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(ROUTES),
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
+  exports: [
+    RouterModule,
+  ],
 })
 export class UserProfileModule {}

@@ -56,6 +56,21 @@ class User extends U
         return $user;
     }
 
+    public static function getById($id)
+    {
+        /** @var User $user */
+        $user = User::find()
+            ->where(
+                ['id'  => new Expression(':id')],
+                [':id' => $id]
+            )->one();
+
+        if (empty($user))
+            throw new Exception("Can't find user with id - {$id}");
+
+        return $user;
+    }
+
     public function getRole()
     {
         if (empty($this->role)) {

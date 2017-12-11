@@ -4,11 +4,10 @@ namespace backend\modules\v1\controllers;
 use yii\rest\Controller;
 use yii\filters\Cors;
 use yii\filters\auth\HttpBearerAuth;
-use backend\modules\v1\models\User;
-use backend\modules\v1\responses\UserGetResponse;
-use backend\modules\v1\responses\UserResponse;
+use backend\modules\v1\models\Role;
+use backend\modules\v1\responses\RoleListResponse;
 
-class UserController extends Controller
+class RoleController extends Controller
 {
     public function behaviors()
     {
@@ -35,25 +34,13 @@ class UserController extends Controller
 
     public function actionIndex()
     {
-        $users    = User::find()
-            ->with(['profile'])
-            ->all();
-        $response = (new UserGetResponse())
-            ->setData($users)
-            ->validateData()
-            ->getResponse();
-
-        return $response;
-    }
-
-    public function actionView($id)
-    {
         $response = [];
 
         try {
-            $response = (new UserResponse())
-                ->setData(User::getById($id))
-                ->validateData();
+            $response = (new RoleListResponse())
+                ->setData(Role::getAll())
+                ->validateData()
+                ->getResponse();
         } catch (\Exception $e) {
             $response['error'] = $e->getMessage();
         }

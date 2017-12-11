@@ -6,7 +6,7 @@ use yii\rest\Controller;
 use yii\filters\Cors;
 use backend\modules\v1\models\User;
 use backend\modules\v1\requests\LoginRequest;
-use backend\modules\v1\responses\LoginResponse;
+use backend\modules\v1\responses\UserResponse;
 use backend\modules\v1\requests\LoginCheckRequest;
 use backend\modules\v1\responses\LoginCheckResponse;
 
@@ -40,7 +40,7 @@ class LoginController extends Controller
                 ->setData(Yii::$app->getRequest()->getBodyParams())
                 ->validateData();
             $user     = User::login($request);
-            $response = (new LoginResponse())
+            $response = (new UserResponse())
                 ->setData($user)
                 ->validateData();
         } catch (\Exception $e) {

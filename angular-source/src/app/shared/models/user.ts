@@ -1,7 +1,8 @@
 export class User {
-  id: number;
+  id: number|string;
   access_token: string;
   username: string;
+
   profile: {
     first_name: string,
     family_name: string,
@@ -9,8 +10,10 @@ export class User {
     photo: string,
     telephone_number: string,
   };
+
   role: {
     name: string,
   };
-  permissions;
+
+  permissions: {};
 }

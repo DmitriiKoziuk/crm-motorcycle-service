@@ -59,7 +59,12 @@ return [
                     'pluralize'   => false,
                     'controller' => 'v1/login'
                 ],
-                'POST,OPTIONS v1/login/check' => 'v1/login/check'
+                'POST,OPTIONS v1/login/check' => 'v1/login/check',
+                [
+                    'class'      => 'yii\rest\UrlRule',
+                    'pluralize'   => false,
+                    'controller' => 'v1/role'
+                ],
             ],
         ],
     ],
