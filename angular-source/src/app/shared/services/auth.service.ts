@@ -23,7 +23,7 @@ export class AuthService {
     }
   }
 
-  can(permissionName) {
+  isLoggedInUserCan(permissionName) {
     return this.loggedInUser.permissions.hasOwnProperty(permissionName);
   }
 
@@ -31,7 +31,7 @@ export class AuthService {
     return this.apiService.get('user');
   }
 
-  isLoggedIn() {
+  isUserLoggedIn() {
     return this.loggedInUser;
   }
 
