@@ -27,10 +27,6 @@ export class AuthService {
     return this.loggedInUser.permissions.hasOwnProperty(permissionName);
   }
 
-  getAll() {
-    return this.apiService.get('user');
-  }
-
   isUserLoggedIn() {
     return this.loggedInUser;
   }

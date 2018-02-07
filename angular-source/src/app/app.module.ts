@@ -13,6 +13,7 @@ import { ApiService } from './shared/services/api.service';
 import { AccessTokenService } from './shared/services/access-token.service';
 import { AuthService } from './shared/services/auth.service';
 import { RoleService } from './shared/services/role.service';
+import { UserService } from './shared/services/user.service';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { RoleService } from './shared/services/role.service';
     AccessTokenService,
     AuthService,
     RoleService,
+    UserService,
   ],
   bootstrap: [
     AppComponent
