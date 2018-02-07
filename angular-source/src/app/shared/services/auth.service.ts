@@ -3,14 +3,15 @@ import { Router } from '@angular/router';
 
 import { ApiService } from './api.service';
 import { AccessTokenService } from './access-token.service';
-import { User } from '../models/user';
 import { DebugService } from './debug.service';
 
-@Injectable()
-export class UserService {
+import { User } from '../models/user';
 
-  private data: User|null = null;
-  private storageName     = 'userData';
+@Injectable()
+export class AuthService {
+
+  private loggedInUser: User|null = null;
+  private storageName             = 'loggedInUser';
 
   constructor(
     private apiService:  ApiService,
@@ -23,20 +24,15 @@ export class UserService {
   }
 
   can(permissionName) {
-    return this.data.permissions.hasOwnProperty(permissionName);
+    return this.loggedInUser.permissions.hasOwnProperty(permissionName);
   }
 
   getAll() {
     return this.apiService.get('user');
   }
 
-  // TODO load profile from this.data if same id
-  getUser(id) {
-    return this.apiService.get(`user/${id}`);
-  }
-
   isLoggedIn() {
-    return this.data;
+    return this.loggedInUser;
   }
 
   login(username: string, password: string) {
@@ -46,11 +42,11 @@ export class UserService {
     }).subscribe((data) => {
       DebugService.Log(data);
       if (!data['error']) {
-        this.data = new User();
-        this.data = <User>data;
-        this.accessToken.set(this.data.access_token);
+        this.loggedInUser = new User();
+        this.loggedInUser = <User>data;
+        this.accessToken.set(this.loggedInUser.access_token);
         this.saveToLocalStorage();
-        DebugService.Log(this.data);
+        DebugService.Log(this.loggedInUser);
         this.router.navigate(['/']);
         return null;
       } else {
@@ -63,15 +59,15 @@ export class UserService {
 
   logOut() {
     this.removeFromLocalStorage();
-    this.data = null;
+    this.loggedInUser = null;
     this.router.navigate(['/login']);
   }
 
   checkStatus() {
-    if (this.data) {
+    if (this.loggedInUser) {
       this.apiService.post('login/check', {
-        'username': this.data.username,
-        'access_token': this.data.access_token,
+        'username': this.loggedInUser.username,
+        'access_token': this.loggedInUser.access_token,
       }).subscribe((data) => {
         if (data['error']) {
           this.removeFromLocalStorage();
@@ -82,13 +78,13 @@ export class UserService {
   }
 
   protected saveToLocalStorage() {
-    window.localStorage.setItem(this.storageName, JSON.stringify(this.data));
+    window.localStorage.setItem(this.storageName, JSON.stringify(this.loggedInUser));
   }
 
   protected loadFromLocalStorage() {
     if (window.localStorage.getItem(this.storageName)) {
-      this.data = JSON.parse(window.localStorage.getItem(this.storageName));
-      this.accessToken.set(this.data.access_token);
+      this.loggedInUser = JSON.parse(window.localStorage.getItem(this.storageName));
+      this.accessToken.set(this.loggedInUser.access_token);
       this.checkStatus();
     }
   }

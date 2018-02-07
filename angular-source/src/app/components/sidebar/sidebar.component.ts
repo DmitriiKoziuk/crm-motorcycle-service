@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserService } from '../../shared/services/user.service';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -12,5 +12,5 @@ export class SidebarComponent {
     {name: 'users', url: ['/user'], permissionName: 'seeUserControlPage', iconName: ''},
   ];
 
-  constructor(public userService: UserService) { }
+  constructor(public authService: AuthService) { }
 }

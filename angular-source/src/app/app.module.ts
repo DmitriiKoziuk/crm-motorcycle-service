@@ -11,7 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { DebugService } from './shared/services/debug.service';
 import { ApiService } from './shared/services/api.service';
 import { AccessTokenService } from './shared/services/access-token.service';
-import { UserService } from './shared/services/user.service';
+import { AuthService } from './shared/services/auth.service';
 import { RoleService } from './shared/services/role.service';
 
 
@@ -30,7 +30,7 @@ import { RoleService } from './shared/services/role.service';
     DebugService,
     ApiService,
     AccessTokenService,
-    UserService,
+    AuthService,
     RoleService,
   ],
   bootstrap: [
