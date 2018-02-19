@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {UserService} from '../../shared/services/user.service';
+import {AuthService} from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +7,9 @@ import {UserService} from '../../shared/services/user.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  constructor(private userService: UserService) {}
+  constructor(private authService: AuthService) {}
 
   logOut() {
-    this.userService.logOut();
+    this.authService.logOut();
   }
 }

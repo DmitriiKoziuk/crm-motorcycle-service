@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { UserService } from './shared/services/user.service';
+import { AuthService } from './shared/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -11,10 +11,10 @@ import { UserService } from './shared/services/user.service';
 export class AppComponent implements OnInit {
   title = 'app';
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
-    if (!this.userService.isLoggedIn()) {
+    if (!this.authService.isUserLoggedIn()) {
       this.router.navigate(['/login']);
     }
   }

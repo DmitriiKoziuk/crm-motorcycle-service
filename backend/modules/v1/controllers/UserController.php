@@ -1,6 +1,7 @@
 <?php
 namespace backend\modules\v1\controllers;
 
+use Yii;
 use yii\rest\Controller;
 use yii\filters\Cors;
 use yii\filters\auth\HttpBearerAuth;
@@ -59,5 +60,23 @@ class UserController extends Controller
         }
 
         return $response;
+    }
+
+    public function actionCreate()
+    {
+        $s = 'ss';
+        return ['m' => 'create'];
+    }
+
+    public function actionUpdate($id)
+    {
+        $params = Yii::$app->getRequest()->getBodyParams();
+        return ['m' => 'update'];
+    }
+
+    public function actionDelete()
+    {
+        $s = 'ss';
+        return ['m' => 'delete'];
     }
 }

@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { UserProfileComponent } from './user-profile.component';
 import { MaterialModule } from '../../../shared/modules/material.module';
+import { UserRecord } from '../../../shared/records/user.record';
 
 const ROUTES: Routes = [
   {path: '', component: UserProfileComponent},
@@ -20,6 +21,9 @@ const ROUTES: Routes = [
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+  ],
+  providers: [
+    UserRecord,
   ],
   exports: [
     RouterModule,

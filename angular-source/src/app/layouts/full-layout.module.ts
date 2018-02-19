@@ -7,6 +7,7 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { HeaderComponent } from '../components/header/header.component';
 import { SidebarComponent } from '../components/sidebar/sidebar.component';
 import { CommonModule } from '@angular/common';
+import { CollapseModule } from 'ngx-bootstrap';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { CommonModule } from '@angular/common';
     MaterialModule,
     RouterModule,
     AngularFontAwesomeModule,
+    CollapseModule,
   ],
 })
 export class FullLayoutModule {}

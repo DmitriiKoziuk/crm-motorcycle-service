@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {MatTableDataSource} from '@angular/material';
-import {UserService} from '../../../shared/services/user.service';
+import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material';
+
+import { UserService } from '../../../shared/services/user.service';
 
 @Component({
   selector: 'app-user-list',
@@ -11,7 +12,9 @@ export class UserListComponent implements OnInit {
   displayedColumns = ['id', 'photo', 'role', 'login', 'name', 'tel', 'actions'];
   dataSource;
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+  ) {}
 
   ngOnInit() {
     this.dataSource = new MatTableDataSource();

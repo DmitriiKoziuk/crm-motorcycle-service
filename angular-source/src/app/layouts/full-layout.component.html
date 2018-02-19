@@ -1,10 +1,34 @@
-<app-header></app-header>
+<div class="wrapper">
+  <nav id="sidebar" [ngClass]="{'active': isSidebarActive}">
+    <!-- Sidebar Header -->
+    <div class="sidebar-header">
+      <h3>Hello</h3>
+    </div>
 
-<mat-sidenav-container class="example-container">
-  <mat-sidenav #sidenav mode="side" opened="true" class="sidenav">
-    <app-sidebar></app-sidebar>
-  </mat-sidenav>
-  <mat-sidenav-content>
+    <!-- Sidebar Links -->
+    <ul class="list-unstyled components">
+      <li routerLinkActive="active">
+        <a [routerLink]="'/dashboard'">
+          <i class="fa fa-desktop"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <li routerLinkActive="active">
+        <a [routerLink]="'/user'">
+          <i class="fa fa-users"></i>
+          <span>Users</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div id="content">
+    <nav class="navbar">
+      <button type="button" class="btn toggle-button" (click)="toggleSidebar()">
+        <i class="fa fa-align-justify"></i>
+      </button>
+    </nav>
+
     <router-outlet></router-outlet>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+  </div>
+</div>

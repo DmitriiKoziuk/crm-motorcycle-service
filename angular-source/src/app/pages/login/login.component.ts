@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { UserService } from '../../shared/services/user.service';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   minLength = 5;
   maxLength = 10;
 
-  constructor(private userService: UserService) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
     this.loginForm = new FormGroup({
@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
 
   submit() {
     if (this.loginForm.valid) {
-      this.error = this.userService.login(
+      this.error = this.authService.login(
         this.loginForm.get('username').value,
         this.loginForm.get('password').value
       );

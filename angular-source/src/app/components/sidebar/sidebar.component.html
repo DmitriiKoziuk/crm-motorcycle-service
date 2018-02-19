@@ -1,7 +1,7 @@
 <div class="sidebar">
   <ul>
     <li *ngFor="let link of links">
-      <a *ngIf="userService.can(link.permissionName)" [routerLink]="link.url" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+      <a *ngIf="authService.isLoggedInUserCan(link.permissionName)" [routerLink]="link.url" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
         <span>{{link.name}}</span>
       </a>
     </li>

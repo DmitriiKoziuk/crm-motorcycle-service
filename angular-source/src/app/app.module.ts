@@ -10,9 +10,10 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { DebugService } from './shared/services/debug.service';
 import { ApiService } from './shared/services/api.service';
-import { UserService } from './shared/services/user.service';
+import { AccessTokenService } from './shared/services/access-token.service';
 import { AuthService } from './shared/services/auth.service';
 import { RoleService } from './shared/services/role.service';
+import { UserService } from './shared/services/user.service';
 
 
 @NgModule({
@@ -29,9 +30,10 @@ import { RoleService } from './shared/services/role.service';
   providers: [
     DebugService,
     ApiService,
-    UserService,
+    AccessTokenService,
     AuthService,
     RoleService,
+    UserService,
   ],
   bootstrap: [
     AppComponent
