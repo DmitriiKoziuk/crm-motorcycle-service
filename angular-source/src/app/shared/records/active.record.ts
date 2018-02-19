@@ -20,6 +20,27 @@ export class ActiveRecord {
     return this.attributes.get(path).value;
   }
 
+  getAttributeError(path: string) {
+    if (this.attributes.get(path).valid) {
+      return false;
+    } else {
+      let e = '';
+      let m = '';
+      for (const error in this.attributes.get(path).errors) {
+        if (this.attributes.get(path).errors.hasOwnProperty(error)) {
+          switch (error) {
+            case 'required': m = 'Is required.'; break;
+            case 'minlength': m = 'Must be at least ! characters long.'; break;
+            case 'maxlength': m = 'Cannot be more than ! characters long.'; break;
+            default: m = error; break;
+          }
+          e = (e === '' ? e + m : e + ', ' + m);
+        }
+      }
+      return e;
+    }
+  }
+
   setAttribute(name, value) {
     this.attributes.get(name).setValue(value);
   }
@@ -81,22 +102,48 @@ export class ActiveRecord {
     return (this.attributes.get('id').value === '');
   }
 
+  isAttributeValid(path: string) {
+    return this.attributes.get(path).valid;
+  }
+
+  isAttributeNotValid(path: string) {
+    return !this.isAttributeValid(path);
+  }
+
+  isAttributeChanged() {
+    return this.attributes.dirty;
+  }
+
+  isAttributeNotChanged() {
+    return ! this.isAttributeChanged();
+  }
+
+  isValid() {
+    return this.attributes.valid;
+  }
+
+  isNotValid() {
+    return !this.isValid();
+  }
+
   save() {
-    if (this.isNewRecord()) {
-      console.log(this.attributes.getRawValue());
-      this.api
-        .post(this.getUrl(), this.attributes.getRawValue())
-        .subscribe((response) => {
-          console.log('put', this.attributes.getRawValue());
-          console.log('response', response);
-        });
-    } else {
-      this.api
-        .put(this.getUrl() + '/' + this.attributes.get('id').value, this.attributes.getRawValue())
-        .subscribe((response) => {
-          console.log('post', this.attributes.getRawValue());
-          console.log('response', response);
-        });
+    if (this.attributes.valid) {
+      if (this.isNewRecord()) {
+        console.log(this.attributes.getRawValue());
+        this.api
+          .post(this.getUrl(), this.attributes.getRawValue())
+          .subscribe((response) => {
+            console.log('put', this.attributes.getRawValue());
+            console.log('response', response);
+          });
+      } else {
+        this.api
+          .put(this.getUrl() + '/' + this.attributes.get('id').value, this.attributes.getRawValue())
+          .subscribe((response) => {
+            console.log('post', this.attributes.getRawValue());
+            console.log('response', response);
+          });
+      }
     }
   }
 }
