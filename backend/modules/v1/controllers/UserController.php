@@ -5,6 +5,7 @@ use Yii;
 use yii\rest\Controller;
 use yii\filters\Cors;
 use yii\filters\auth\HttpBearerAuth;
+use backend\modules\v1\components\UserAction;
 use backend\modules\v1\models\User;
 use backend\modules\v1\responses\UserGetResponse;
 use backend\modules\v1\responses\UserResponse;
@@ -70,8 +71,12 @@ class UserController extends Controller
 
     public function actionUpdate($id)
     {
-        $params = Yii::$app->getRequest()->getBodyParams();
-        return ['m' => 'update'];
+        try {
+            UserAction::update(Yii::$app->getRequest()->getBodyParams());
+            return ['m' => 'updated'];
+        } catch (\Exception $e) {
+            return ['error' => $e->getMessage()];
+        }
     }
 
     public function actionDelete()
