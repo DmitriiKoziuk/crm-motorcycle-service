@@ -3,16 +3,21 @@ namespace backend\modules\v1\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use yii\db\Expression;
 
 class UserSearch extends User
 {
+    public $first_name;
+    public $family_name;
+    public $telephone_number;
+
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['username', 'role'], 'string'],
+            [['username', 'role', 'first_name', 'family_name', 'telephone_number'], 'string'],
         ];
     }
 
@@ -51,6 +56,37 @@ class UserSearch extends User
             $query->andWhere([
                 'like', 'username', $this->username
             ]);
+        }
+
+        if (
+            ! empty($this->first_name) ||
+            ! empty($this->family_name) ||
+            ! empty($this->telephone_number)
+        ) {
+            $query->innerJoin(
+                UserProfile::tableName(),
+                [
+                    'user_profile.user_id' => new Expression('user.id'),
+                ]
+            );
+
+            if (! empty($this->first_name)) {
+                $query->andWhere(
+                    ['like', 'user_profile.first_name', $this->first_name]
+                );
+            }
+
+            if (! empty($this->family_name)) {
+                $query->andWhere(
+                    ['like', 'user_profile.family_name', $this->family_name]
+                );
+            }
+
+            if (! empty($this->telephone_number)) {
+                $query->andWhere(
+                    ['like', 'user_profile.telephone_number', $this->telephone_number]
+                );
+            }
         }
 
         return $dataProvider;

@@ -9,7 +9,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class UserListSearchFormComponent implements OnInit {
   form = new FormGroup({
-    username: new FormControl(''),
+    username:         new FormControl(''),
+    first_name:       new FormControl(''),
+    family_name:      new FormControl(''),
+    telephone_number: new FormControl(''),
   });
 
   constructor(
