@@ -7,6 +7,7 @@ use yii\filters\Cors;
 use yii\filters\auth\HttpBearerAuth;
 use backend\modules\v1\components\UserAction;
 use backend\modules\v1\models\User;
+use backend\modules\v1\models\UserSearch;
 use backend\modules\v1\responses\UserGetResponse;
 use backend\modules\v1\responses\UserResponse;
 
@@ -37,9 +38,9 @@ class UserController extends Controller
 
     public function actionIndex()
     {
-        $users    = User::find()
-            ->with(['profile'])
-            ->all();
+        $queryParams = Yii::$app->request->get();
+        $userSearch  = new UserSearch();
+        $users    = $userSearch->search($queryParams)->getModels();
         $response = (new UserGetResponse())
             ->setData($users)
             ->validateData()
