@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <form [formGroup]="form" class="mat-elevation-z8">
+        <div class="row">
+          <div class="col">
+            <mat-form-field>
+              <input matInput placeholder="Username" formControlName="username">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button mat-raised-button color="primary" (click)="search()">Search</button>
+            <button mat-raised-button color="warn" (click)="reset()">Reset</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
