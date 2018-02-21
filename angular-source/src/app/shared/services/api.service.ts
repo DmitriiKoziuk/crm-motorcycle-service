@@ -16,8 +16,8 @@ export class ApiService {
     this.apiUrl = 'http://api.' + window.location.hostname + '/v1/';
   }
 
-  get(url: string) {
-    return this.http.get(this.setUrl(url), {
+  get(url: string, params = {}) {
+    return this.http.get(this.setUrl(url, params), {
       headers: new HttpHeaders().set('Authorization', `Bearer ${this.accessToken.get()}`),
     });
   }
@@ -34,12 +34,28 @@ export class ApiService {
     });
   }
 
-  protected setUrl(url: string) {
+  protected setUrl(url: string, params = {}) {
+
+    let queryParams = '';
+    for (const key in params) {
+      if (params.hasOwnProperty( key )) {
+        queryParams += (queryParams === '' ? key + '=' + params[ key ] : '&' + key + '=' + params[ key ]);
+      }
+    }
+
+    if (! environment.production) {
+      queryParams += (queryParams === '' ? 'XDEBUG_SESSION_START=debug' : '&XDEBUG_SESSION_START=debug');
+    }
+
+    if ('' !== queryParams) {
+      queryParams = '?' + queryParams;
+    }
+
     let urlString = '';
-    if (environment.production) {
+    if ('' === queryParams) {
       urlString = this.apiUrl + url;
     } else {
-      urlString = this.apiUrl + url + '?XDEBUG_SESSION_START=debug';
+      urlString = this.apiUrl + url + queryParams;
     }
     return urlString;
   }
