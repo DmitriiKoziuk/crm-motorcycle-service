@@ -25,6 +25,8 @@ export class UserRecord extends ActiveRecord {
       middle_name:      new FormControl(''),
       photo:            new FormControl(''),
       telephone_number: new FormControl('', [
+        Validators.minLength(13),
+        Validators.maxLength(13),
         Validators.required,
       ]),
     }),
