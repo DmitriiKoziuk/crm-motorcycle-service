@@ -7,7 +7,7 @@ use backend\modules\v1\models\User;
 class UserGetResponse extends Model
 {
     /** @var User[] $users */
-    public $users;
+    public $users = [];
 
     public function rules()
     {
