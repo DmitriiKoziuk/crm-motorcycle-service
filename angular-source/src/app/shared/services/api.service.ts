@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { environment } from '../../../environments/environment';
 import { AccessTokenService } from './access-token.service';
@@ -12,8 +13,9 @@ export class ApiService {
   constructor(
     private http:        HttpClient,
     private accessToken: AccessTokenService,
+    private router:      Router
   ) {
-    this.apiUrl = 'http://api.' + window.location.hostname + '/v1/';
+    this.apiUrl = 'http://api.' + window.location.hostname + '/v1';
   }
 
   get(url: string, params = {}) {
@@ -35,28 +37,18 @@ export class ApiService {
   }
 
   protected setUrl(url: string, params = {}) {
+    const queryParams = {};
 
-    let queryParams = '';
-    for (const key in params) {
-      if (params.hasOwnProperty( key )) {
-        queryParams += (queryParams === '' ? key + '=' + params[ key ] : '&' + key + '=' + params[ key ]);
-      }
-    }
+    Object.keys(params).forEach(name => {
+      queryParams[name] = params[name];
+    });
 
     if (! environment.production) {
-      queryParams += (queryParams === '' ? 'XDEBUG_SESSION_START=debug' : '&XDEBUG_SESSION_START=debug');
+      queryParams['XDEBUG_SESSION_START'] = 'debug';
     }
 
-    if ('' !== queryParams) {
-      queryParams = '?' + queryParams;
-    }
-
-    let urlString = '';
-    if ('' === queryParams) {
-      urlString = this.apiUrl + url;
-    } else {
-      urlString = this.apiUrl + url + queryParams;
-    }
-    return urlString;
+    return this.apiUrl + this.router
+      .createUrlTree(['/' + url], {queryParams: queryParams})
+      .toString();
   }
 }
