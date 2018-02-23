@@ -101,7 +101,6 @@ export class ActiveRecord {
   findWhere(params) {
     return new Promise((resolve, reject) => {
       this.api.get(this.getUrl(), params).subscribe((data) => {
-        console.log(data);
         if (data['error']) {
           reject(data['error']);
         } else {
