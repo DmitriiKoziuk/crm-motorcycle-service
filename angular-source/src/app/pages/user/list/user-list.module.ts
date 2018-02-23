@@ -5,14 +5,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { UserListComponent } from './user-list.component';
 import { MaterialModule } from '../../../shared/modules/material.module';
-import { TelephonePipe } from '../../../shared/pipes/telephone.pipe';
 import { UserListSearchFormComponent } from './search-form/user-list-search-form.component';
+import { PipeModule } from '../../../shared/modules/pipe.module';
 
 @NgModule({
   declarations: [
     UserListComponent,
     UserListSearchFormComponent,
-    TelephonePipe,
   ],
   imports: [
     RouterModule,
@@ -20,6 +19,7 @@ import { UserListSearchFormComponent } from './search-form/user-list-search-form
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    PipeModule,
   ],
 })
 export class UserListModule {}
