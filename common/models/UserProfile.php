@@ -36,6 +36,7 @@ class UserProfile extends ActiveRecord
             [['user_id', 'first_name', 'telephone_number'], 'required'],
             [['user_id'], 'integer'],
             [['first_name', 'family_name', 'middle_name', 'photo'], 'string', 'max' => 45],
+            [['family_name', 'middle_name', 'photo'], 'default', 'value' => ''],
             [['telephone_number'], 'string', 'min' => 12, 'max' => 15],
             [
                 ['user_id'],
