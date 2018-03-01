@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
-import { UserListComponent } from './user-list.component';
+import { ClientListComponent } from './client-list.component';
 import { MaterialModule } from '../../../shared/modules/material.module';
-import { UserListSearchFormComponent } from './search-form/user-list-search-form.component';
+import { ClientListSearchFormComponent } from './search-form/client-list-search-form.component';
 import { PipeModule } from '../../../shared/modules/pipe.module';
 
 @NgModule({
   declarations: [
-    UserListComponent,
-    UserListSearchFormComponent,
+    ClientListComponent,
+    ClientListSearchFormComponent,
   ],
   imports: [
     RouterModule,
@@ -22,4 +22,4 @@ import { PipeModule } from '../../../shared/modules/pipe.module';
     PipeModule,
   ],
 })
-export class UserListModule {}
+export class ClientListModule {}

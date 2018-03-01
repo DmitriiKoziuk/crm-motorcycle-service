@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 
 import { ApiService } from '../services/api.service';
 import { isObject } from 'util';
@@ -55,8 +55,12 @@ export class ActiveRecord {
           const addTo = <FormGroup>this.attributes.get(localControlName);
 
           if (isObject( attributes[ key ] )) {
-            addTo.addControl(key,  new FormGroup({}));
-            this.setAttributes(attributes[ key ], fullControlName);
+            if (addTo instanceof FormArray) {
+              (<FormArray>addTo).push(new FormGroup({}));
+            } else {
+              addTo.addControl(key,  new FormGroup({}));
+              this.setAttributes(attributes[ key ], fullControlName);
+            }
           } else {
             addTo.addControl(key,  new FormControl(''));
           }
@@ -101,7 +105,6 @@ export class ActiveRecord {
   findWhere(params) {
     return new Promise((resolve, reject) => {
       this.api.get(this.getUrl(), params).subscribe((data) => {
-        console.log(data);
         if (data['error']) {
           reject(data['error']);
         } else {
@@ -140,23 +143,34 @@ export class ActiveRecord {
   }
 
   save() {
-    if (this.attributes.valid) {
-      if (this.isNewRecord()) {
-        console.log(this.attributes.getRawValue());
-        this.api
-          .post(this.getUrl(), this.attributes.getRawValue())
-          .subscribe((response) => {
-            console.log('put', this.attributes.getRawValue());
-            console.log('response', response);
-          });
+    return new Promise((resolve, reject) => {
+      if (this.attributes.valid) {
+        if (this.isNewRecord()) {
+          this.api
+            .post(this.getUrl(), this.attributes.getRawValue())
+            .subscribe((response) => {
+              if (response['error']) {
+                reject(response['error']);
+              } else {
+                resolve(response);
+              }
+            });
+        } else {
+          this.api
+            .put(this.getUrl() + '/' + this.attributes.get('id').value, this.attributes.getRawValue())
+            .subscribe((response) => {
+              if (response['error']) {
+                reject(response['error']);
+              } else {
+                resolve(response);
+              }
+            });
+        }
       } else {
-        this.api
-          .put(this.getUrl() + '/' + this.attributes.get('id').value, this.attributes.getRawValue())
-          .subscribe((response) => {
-            console.log('post', this.attributes.getRawValue());
-            console.log('response', response);
-          });
+        reject({
+          error: 'Attribute not valid'
+        });
       }
-    }
+    });
   }
 }

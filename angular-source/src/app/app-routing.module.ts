@@ -11,7 +11,8 @@ const ROUTES: Routes = [
     component: FullLayoutComponent,
     children: [
       { path: 'dashboard', loadChildren: './pages/dashboard/dashboard.module#DashboardModule' },
-      { path: 'user', loadChildren: './pages/user/user.module#UserModule' }
+      { path: 'user', loadChildren: './pages/user/user.module#UserModule' },
+      { path: 'client', loadChildren: './pages/client/client.module#ClientModule' },
     ]
   },
   {

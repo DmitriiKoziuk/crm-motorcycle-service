@@ -1,25 +1,31 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
-import { UserListComponent } from './user-list.component';
+import { ClientCreateComponent } from './client-create.component';
 import { MaterialModule } from '../../../shared/modules/material.module';
-import { UserListSearchFormComponent } from './search-form/user-list-search-form.component';
 import { PipeModule } from '../../../shared/modules/pipe.module';
+
+const ROUTES: Routes = [
+  {path: '', component: ClientCreateComponent},
+];
 
 @NgModule({
   declarations: [
-    UserListComponent,
-    UserListSearchFormComponent,
+    ClientCreateComponent,
   ],
   imports: [
-    RouterModule,
     CommonModule,
+    RouterModule.forChild(ROUTES),
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
     PipeModule,
   ],
+  exports: [
+    RouterModule,
+  ],
 })
-export class UserListModule {}
+export class ClientCreateModule {
+}

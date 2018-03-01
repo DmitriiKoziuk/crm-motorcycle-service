@@ -22,9 +22,9 @@ class m171207_124746_create_user_profile_table extends Migration
         $this->createTable($this->table, [
             'user_id'          => $this->integer()->notNull(),
             'first_name'       => $this->string(45)->notNull(),
-            'family_name'      => $this->string(45),
-            'middle_name'      => $this->string(45),
-            'photo'            => $this->string(45),
+            'family_name'      => $this->string(45)->notNull()->defaultValue(''),
+            'middle_name'      => $this->string(45)->notNull()->defaultValue(''),
+            'photo'            => $this->string(45)->notNull()->defaultValue(''),
             'telephone_number' => $this->string(15)->notNull(),
         ], $tableOptions);
 

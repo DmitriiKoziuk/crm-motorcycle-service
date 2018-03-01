@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { PageTitleService } from '../shared/services/page-title.service';
+
 @Component({
   selector: 'app-full-layout',
   templateUrl: './full-layout.component.html',
@@ -7,18 +9,11 @@ import { Component } from '@angular/core';
 })
 export class FullLayoutComponent {
 
-  constructor() { }
-
-  isCollapsed     = false;
   isSidebarActive = false;
 
-  collapsed(event: any): void {
-    console.log(event);
-  }
-
-  expanded(event: any): void {
-    console.log(event);
-  }
+  constructor(
+    public pageTitle: PageTitleService
+  ) { }
 
   toggleSidebar() {
     this.isSidebarActive = !this.isSidebarActive;

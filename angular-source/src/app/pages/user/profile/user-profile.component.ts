@@ -4,6 +4,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Role } from '../../../shared/models/role';
 import { RoleService } from '../../../shared/services/role.service';
 import { UserRecord } from '../../../shared/records/user.record';
+import { PageTitleService } from '../../../shared/services/page-title.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -11,12 +12,12 @@ import { UserRecord } from '../../../shared/records/user.record';
   styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
-  title = 'Edit user';
   roles: Role[];
 
   constructor(
     private activeRoute: ActivatedRoute,
     private roleService: RoleService,
+    private pageTitle:   PageTitleService,
     public  userRecord:  UserRecord,
   ) {}
 
@@ -33,6 +34,6 @@ export class UserProfileComponent implements OnInit {
   }
 
   initSomeData() {
-    this.title += ` - ${this.userRecord.getAttribute('username')}`;
+    this.pageTitle.set('Edit user' + ` - ${this.userRecord.getAttribute('username')}`);
   }
 }
