@@ -17,12 +17,13 @@ class ActionLogIndexResponse extends IndexResponse
         foreach ($dataProvider->getModels() as $key => $model) {
             $result[ $key ] = [
                 'id'          => $model->id,
+                'user'        => $model->user->profile,
                 'entity_name' => $model->entity_name,
                 'entity_id'   => $model->entity_id,
                 'action_type' => $model->action_type,
                 'old_data'    => (empty($model->old_data) ? '' : unserialize($model->old_data)),
                 'new_data'    => (empty($model->new_data) ? '' : unserialize($model->new_data)),
-                'apply_time'  => $model->apply_time,
+                'apply_time'  => date(DATE_RFC822, $model->apply_time),
             ];
         }
 
