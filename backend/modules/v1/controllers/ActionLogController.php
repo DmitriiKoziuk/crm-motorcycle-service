@@ -1,9 +1,12 @@
 <?php
 namespace backend\modules\v1\controllers;
 
+use Yii;
 use yii\rest\Controller;
 use yii\filters\Cors;
 use yii\filters\auth\HttpBearerAuth;
+use backend\modules\v1\models\ActionLogSearch;
+use backend\modules\v1\responses\ActionLogIndexResponse;
 
 class ActionLogController extends Controller
 {
@@ -32,26 +35,8 @@ class ActionLogController extends Controller
 
     public function actionIndex()
     {
-        return ['m' => 'index'];
-    }
-
-    public function actionView($id)
-    {
-        return ['m' => 'view - ' . $id];
-    }
-
-    public function actionCreate()
-    {
-        return ['m' => 'create'];
-    }
-
-    public function actionUpdate($id)
-    {
-        return ['m' => 'update - ' . $id];
-    }
-
-    public function actionDelete($id)
-    {
-        return ['m' => 'delete - ' . $id];
+        $queryParams  = Yii::$app->request->get();
+        $dataProvider = (new ActionLogSearch())->by($queryParams);
+        return ActionLogIndexResponse::generate($dataProvider);
     }
 }
