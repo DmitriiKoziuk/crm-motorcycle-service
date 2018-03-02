@@ -6,7 +6,7 @@ use yii\data\ActiveDataProvider;
 
 class ActionLogSearch extends ActionLog
 {
-    public $page_size  = 2;
+    public $page_size  = 20;
     public $page_index = 0;
 
     /**
