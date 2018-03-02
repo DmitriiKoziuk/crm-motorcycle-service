@@ -1,1 +1,74 @@
-Action log
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="mat-elevation-z2 background-white">
+        <mat-table #table [dataSource]="dataSource">
+          <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="user">
+            <mat-header-cell *matHeaderCellDef> User </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{element.user.first_name}}
+              {{element.user.family_name}}
+              {{element.user.middle_name}}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="entity_name">
+            <mat-header-cell *matHeaderCellDef> Entity name </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{element.entity_name}}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="entity_id">
+            <mat-header-cell *matHeaderCellDef> Entity id </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{element.entity_id}}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="action_type">
+            <mat-header-cell *matHeaderCellDef> Action type </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{element.action_type}}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="old_data">
+            <mat-header-cell *matHeaderCellDef> Old data </mat-header-cell>
+            <mat-cell *matCellDef="let element" class="data">
+              {{element.old_data | json}}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="new_data">
+            <mat-header-cell *matHeaderCellDef> New data </mat-header-cell>
+            <mat-cell *matCellDef="let element" class="data">
+              {{element.new_data | json}}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="apply_time">
+            <mat-header-cell *matHeaderCellDef> Apply time </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{element.apply_time}}
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+        <mat-paginator [length]="length"
+                       [pageSize]="pageSize"
+                       [pageIndex]="pageIndex"
+                       [pageSizeOptions]="pageSizeOptions"
+                       (page)="paginationEvent($event)">
+        </mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>
