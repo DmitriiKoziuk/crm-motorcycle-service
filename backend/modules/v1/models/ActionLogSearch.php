@@ -37,7 +37,9 @@ class ActionLogSearch extends ActionLog
     {
         $this->setAttributes($params);
 
-        $query        = ActionLog::find();
+        $query        = ActionLog::find()->with([
+            'user.profile'
+        ]);
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
