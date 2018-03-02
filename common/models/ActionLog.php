@@ -19,9 +19,9 @@ use yii\db\ActiveRecord;
  */
 class ActionLog extends ActiveRecord
 {
-    const ACTION_TYPE_CREATE = 1;
-    const ACTION_TYPE_UPDATE = 2;
-    const ACTION_TYPE_DELETE = 3;
+    const ACTION_TYPE_CREATE = 'create';
+    const ACTION_TYPE_UPDATE = 'update';
+    const ACTION_TYPE_DELETE = 'delete';
 
     /**
      * @inheritdoc
@@ -38,9 +38,10 @@ class ActionLog extends ActiveRecord
     {
         return [
             [['user_id', 'entity_name', 'action_type', 'apply_time'], 'required'],
-            [['user_id', 'apply_time', 'action_type'], 'integer'],
+            [['user_id', 'apply_time'], 'integer'],
             [['old_data', 'new_data'], 'string'],
             [['entity_name', 'entity_id'], 'string', 'max' => 45],
+            [['action_type'], 'string', 'max' => 15],
             [['entity_id', 'old_data', 'new_data'], 'default', 'value' => ''],
             [
                 ['user_id'],
@@ -72,7 +73,7 @@ class ActionLog extends ActiveRecord
     public static function write(
         string $entityName,
         string $entityId,
-        int    $actionType,
+        string $actionType,
         $oldData,
         $newData
     ) {

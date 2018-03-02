@@ -23,7 +23,7 @@ class m180301_131955_create_action_log_table extends Migration
             'user_id'     => $this->integer()->notNull(),
             'entity_name' => $this->string(45)->notNull(),
             'entity_id'   => $this->string(45)->notNull()->defaultValue(''),
-            'action_type' => $this->integer()->notNull(),
+            'action_type' => $this->string(15)->notNull(),
             'old_data'    => $this->text()->notNull()->defaultValue(''),
             'new_data'    => $this->text()->notNull()->defaultValue(''),
             'apply_time'  => $this->integer()->notNull(),
