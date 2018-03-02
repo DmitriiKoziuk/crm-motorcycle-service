@@ -1,4 +1,4 @@
-export class ClientGetResponse {
+export class GetResponse {
   count:      number;
   page_size:  number;
   page_index: number;
