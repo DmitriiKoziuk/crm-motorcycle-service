@@ -12,7 +12,7 @@ import { PageTitleService } from '../../../shared/services/page-title.service';
   providers: [ClientRecord]
 })
 export class ClientListComponent implements OnInit {
-  displayedColumns = ['id', 'name', 'tel', 'actions'];
+  displayedColumns = ['id', 'name', 'tel', 'vehicle', 'actions'];
   dataSource;
 
   length          = 100;
