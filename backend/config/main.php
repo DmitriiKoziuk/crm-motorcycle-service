@@ -62,6 +62,11 @@ return [
                 [
                     'class'      => 'yii\rest\UrlRule',
                     'pluralize'   => false,
+                    'controller' => 'v1/vehicle'
+                ],
+                [
+                    'class'      => 'yii\rest\UrlRule',
+                    'pluralize'   => false,
                     'controller' => 'v1/action-log'
                 ],
                 [
