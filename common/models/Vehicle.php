@@ -10,9 +10,6 @@ use yii\db\ActiveRecord;
  * @property int    $id
  * @property int    $vehicle_brand_id
  * @property string $model_name
- *
- * @property ClientVehicle[] $clientVehicles
- * @property VehicleBrand    $vehicleBrand
  */
 class Vehicle extends ActiveRecord
 {
@@ -54,22 +51,6 @@ class Vehicle extends ActiveRecord
             'vehicle_brand_id' => 'Vehicle Brand ID',
             'model_name'       => 'Model Name',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getClientVehicles()
-    {
-        return $this->hasMany(ClientVehicle::class, ['vehicle_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getVehicleBrand()
-    {
-        return $this->hasOne(VehicleBrand::class, ['id' => 'vehicle_brand_id']);
     }
 
     public function afterSave($insert, $changedAttributes)
