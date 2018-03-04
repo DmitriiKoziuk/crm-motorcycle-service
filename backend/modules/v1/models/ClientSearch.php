@@ -45,7 +45,9 @@ class ClientSearch extends Client
         $this->setAttributes($params);
 
         $query = Client::find()->with([
-            'telephones'
+            'telephones',
+            'vehicles.vehicle.type',
+            'vehicles.vehicle.brand',
         ]);
 
         $dataProvider = new ActiveDataProvider([
