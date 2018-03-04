@@ -16,14 +16,8 @@ class m180301_083501_create_vehicle_type_table extends Migration
     {
         $this->createTable($this->tableName, [
             'id'   => $this->primaryKey(),
-            'name' => $this->string(15)->notNull(),
+            'name' => $this->string(15)->notNull()->unique(),
         ]);
-
-        $this->createIndex(
-            'idx-vehicle_type-name',
-            $this->tableName,
-            'name'
-        );
     }
 
     /**

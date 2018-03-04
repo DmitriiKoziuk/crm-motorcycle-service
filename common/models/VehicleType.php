@@ -28,6 +28,7 @@ class VehicleType extends ActiveRecord
         return [
             [['name'], 'required'],
             [['name'], 'string', 'max' => 15],
+            [['name'], 'unique'],
         ];
     }
 
