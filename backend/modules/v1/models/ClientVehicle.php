@@ -33,6 +33,11 @@ class ClientVehicle extends CV
         return $this->id;
     }
 
+    public function getType()
+    {
+        return $this->vehicle->type->name;
+    }
+
     public function getBrandName()
     {
         return $this->vehicle->brand->name;
