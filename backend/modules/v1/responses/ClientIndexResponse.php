@@ -24,6 +24,7 @@ class ClientIndexResponse extends IndexResponse
             foreach ($client->vehicles as $vehicleKey => $vehicle) {
                 $result[ $key ]['vehicles'][ $vehicleKey ] = [
                     'id'         => $vehicle->getId(),
+                    'type'       => $vehicle->getType(),
                     'brand_name' => $vehicle->getBrandName(),
                     'model_name' => $vehicle->getModelName(),
                     'vin'        => $vehicle->getVin(),
