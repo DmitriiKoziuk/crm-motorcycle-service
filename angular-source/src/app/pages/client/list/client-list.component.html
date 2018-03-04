@@ -41,6 +41,7 @@
             <mat-header-cell *matHeaderCellDef> Vehicle </mat-header-cell>
             <mat-cell *matCellDef="let element">
               <div *ngFor="let vehicle of element.vehicles">
+                <div>{{vehicle.type}}</div>
                 <div>{{vehicle.brand_name}} {{vehicle.model_name}}</div>
                 <div>{{vehicle.vin}}</div>
                 <div>{{vehicle.note}}</div>
