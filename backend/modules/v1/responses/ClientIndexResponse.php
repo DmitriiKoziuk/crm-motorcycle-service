@@ -4,33 +4,34 @@ namespace backend\modules\v1\responses;
 use yii\data\ActiveDataProvider;
 use backend\modules\v1\models\Client;
 
-class ClientIndexResponse
+class ClientIndexResponse extends IndexResponse
 {
-    protected static $data = [
-        'count'      => null,
-        'page_size'  => null,
-        'page_index' => null,
-        'results'    => null,
-    ];
-
-    public static function generate(ActiveDataProvider $dataProvider)
+    protected static function getResult(ActiveDataProvider $dataProvider)
     {
-        static::$data['count']      = $dataProvider->getTotalCount();
-        static::$data['page_size']  = $dataProvider->pagination->pageSize;
-        static::$data['page_index'] = $dataProvider->pagination->page;
+        $result = [];
 
         /**
-         * @var integer $key
-         * @var Client  $client
+         * @var int    $key
+         * @var Client $client
          */
         foreach ($dataProvider->getModels() as $key => $client) {
-            static::$data['results'][ $key ]               = $client->getAttributes();
-            static::$data['results'][ $key ]['telephones'] = [];
+            $result[ $key ]               = $client->getAttributes();
+            $result[ $key ]['telephones'] = [];
             foreach ($client->telephones as $telephone) {
-                static::$data['results'][ $key ]['telephones'][] = $telephone->getAttributes(['number', 'note']);
+                $result[ $key ]['telephones'][] = $telephone->getAttributes(['number', 'note']);
+            }
+
+            foreach ($client->vehicles as $vehicleKey => $vehicle) {
+                $result[ $key ]['vehicles'][ $vehicleKey ] = [
+                    'id'         => $vehicle->getId(),
+                    'brand_name' => $vehicle->getBrandName(),
+                    'model_name' => $vehicle->getModelName(),
+                    'vin'        => $vehicle->getVin(),
+                    'note'       => $vehicle->getNote(),
+                ];
             }
         }
 
-        return static::$data;
+        return $result;
     }
 }
