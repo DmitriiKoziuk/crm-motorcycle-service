@@ -62,6 +62,11 @@ return [
                 [
                     'class'      => 'yii\rest\UrlRule',
                     'pluralize'   => false,
+                    'controller' => 'v1/action-log'
+                ],
+                [
+                    'class'      => 'yii\rest\UrlRule',
+                    'pluralize'   => false,
                     'controller' => 'v1/login'
                 ],
                 'POST,OPTIONS v1/login/check' => 'v1/login/check',

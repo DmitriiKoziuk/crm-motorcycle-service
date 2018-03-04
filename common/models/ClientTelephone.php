@@ -65,4 +65,32 @@ class ClientTelephone extends ActiveRecord
     {
         return $this->hasOne(Client::class, ['id' => 'client_id']);
     }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+
+        if ((true === $insert) || (false === $insert && ! empty($changedAttributes))) {
+            ActionLog::write(
+                'client_telephone',
+                $this->number,
+                (true === $insert ? ActionLog::ACTION_TYPE_CREATE : ActionLog::ACTION_TYPE_UPDATE),
+                (true === $insert ? '' : serialize($changedAttributes)),
+                $this->getAttributes(array_keys($changedAttributes))
+            );
+        }
+    }
+
+    public function afterDelete()
+    {
+        parent::afterDelete();
+
+        ActionLog::write(
+            'client_telephone',
+            $this->number,
+            ActionLog::ACTION_TYPE_DELETE,
+            $this->getAttributes(),
+            ''
+        );
+    }
 }

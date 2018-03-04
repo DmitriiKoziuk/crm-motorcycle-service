@@ -3,7 +3,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 import { MatTableDataSource, PageEvent } from '@angular/material';
 
 import { ClientRecord } from '../../../shared/records/client.record';
-import { ClientGetResponse } from '../../../shared/reponses/client-get-response';
+import { GetResponse } from '../../../shared/reponses/get-response';
 import { PageTitleService } from '../../../shared/services/page-title.service';
 
 @Component({
@@ -36,7 +36,7 @@ export class ClientListComponent implements OnInit {
 
     this.activeRoute.queryParams.subscribe((params: Params) => {
       this.queryParams = params;
-      this.clientRecord.findWhere(params).then((response: ClientGetResponse) => {
+      this.clientRecord.findWhere(params).then((response: GetResponse) => {
         this.length          = response.count;
         this.pageSize        = response.page_size;
         this.pageIndex       = response.page_index;

@@ -1,10 +1,15 @@
 <app-client-list-search-form></app-client-list-search-form>
 
-<div class="container">
+<div class="container-fluid" style="margin-bottom: 20px;margin-top: 20px;">
   <div class="row">
-    <div class="col-md-12" style="margin-bottom: 20px">
+    <div class="col-md-12">
       <a [routerLink]="'/client/create'" mat-raised-button>Create</a>
     </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
     <div class="col-md-12">
       <div class="mat-elevation-z2 background-white">
         <mat-table #table [dataSource]="dataSource">
