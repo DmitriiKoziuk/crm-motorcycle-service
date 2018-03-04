@@ -37,6 +37,6 @@ export class UserRecord extends ActiveRecord {
   });
 
   getUrl() {
-    return 'user';
+    return '/user';
   }
 }

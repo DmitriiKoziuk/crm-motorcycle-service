@@ -24,6 +24,6 @@ export class ClientRecord extends ActiveRecord {
   });
 
   getUrl() {
-    return 'client';
+    return '/client';
   }
 }

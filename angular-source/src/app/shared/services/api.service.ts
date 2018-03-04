@@ -48,7 +48,7 @@ export class ApiService {
     }
 
     return this.apiUrl + this.router
-      .createUrlTree(['/' + url], {queryParams: queryParams})
+      .createUrlTree([url], {queryParams: queryParams})
       .toString();
   }
 }
