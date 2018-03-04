@@ -3,7 +3,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 import { MatTableDataSource, PageEvent } from '@angular/material';
 
 import { ClientRecord } from '../../../shared/records/client.record';
-import { GetResponse } from '../../../shared/reponses/get-response';
+import { GetResponse } from '../../../shared/reponses/get.response';
 import { PageTitleService } from '../../../shared/services/page-title.service';
 
 @Component({

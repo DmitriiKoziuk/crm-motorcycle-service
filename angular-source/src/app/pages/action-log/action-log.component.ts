@@ -4,7 +4,7 @@ import { MatTableDataSource, PageEvent } from '@angular/material';
 
 import {PageTitleService} from '../../shared/services/page-title.service';
 import {ActionLogRecord} from '../../shared/records/action-log.record';
-import {GetResponse} from '../../shared/reponses/get-response';
+import {GetResponse} from '../../shared/reponses/get.response';
 
 @Component({
   selector: 'app-pages-action-log',
