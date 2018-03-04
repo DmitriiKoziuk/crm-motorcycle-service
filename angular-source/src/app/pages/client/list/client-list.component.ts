@@ -50,6 +50,6 @@ export class ClientListComponent implements OnInit {
       page_index: event.pageIndex,
     });
 
-    this.router.navigate(['/client'], {queryParams: queryParams});
+    this.router.navigate([this.clientRecord.getUrl()], {queryParams: queryParams});
   }
 }
