@@ -23,7 +23,7 @@ class Client extends C
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getVehicle()
+    public function getVehicles()
     {
         return $this->hasMany(ClientVehicle::class, ['client_id' => 'id']);
     }
