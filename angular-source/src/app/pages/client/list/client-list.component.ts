@@ -13,13 +13,12 @@ import { PageTitleService } from '../../../shared/services/page-title.service';
 })
 export class ClientListComponent implements OnInit {
   displayedColumns = ['id', 'name', 'tel', 'vehicle', 'actions'];
-  dataSource;
-
-  length          = 100;
-  pageSize        = 10;
-  pageIndex       = 0;
-  pageSizeOptions = [5, 10, 25, 100];
+  length           = 100;
+  pageSize         = 10;
+  pageIndex        = 0;
+  pageSizeOptions  = [5, 10, 25, 100];
   queryParams: Params;
+  dataSource;
 
   constructor(
     private activeRoute:  ActivatedRoute,
