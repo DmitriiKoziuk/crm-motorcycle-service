@@ -13,7 +13,7 @@ import { GetResponse } from '../../../shared/reponses/get-response';
 })
 export class VehicleListComponent implements OnInit {
   displayedColumns = [
-    'id', 'brand_name', 'model_name',
+    'id', 'type', 'brand_name', 'model_name',
   ];
   length           = 100;
   pageSize         = 10;
