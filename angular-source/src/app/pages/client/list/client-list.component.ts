@@ -7,9 +7,9 @@ import { GetResponse } from '../../../shared/reponses/get-response';
 import { PageTitleService } from '../../../shared/services/page-title.service';
 
 @Component({
-  selector: 'app-pages-client-list',
+  selector:    'app-pages-client-list',
   templateUrl: './client-list.component.html',
-  providers: [ClientRecord]
+  providers:   [ClientRecord]
 })
 export class ClientListComponent implements OnInit {
   displayedColumns = ['id', 'name', 'tel', 'vehicle', 'actions'];
