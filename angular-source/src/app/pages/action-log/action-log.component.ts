@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router, Params} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import { MatTableDataSource, PageEvent } from '@angular/material';
 
-import {PageTitleService} from '../../shared/services/page-title.service';
-import {ActionLogRecord} from '../../shared/records/action-log.record';
-import {ActionLogGetResponse} from '../../shared/reponses/action-log-get.response';
+import { PageTitleService } from '../../shared/services/page-title.service';
+import { ActionLogRecord } from '../../shared/records/action-log.record';
+import { ActionLogGetResponse } from '../../shared/reponses/action-log-get.response';
 
 @Component({
   selector: 'app-pages-action-log',
