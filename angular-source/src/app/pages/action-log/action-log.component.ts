@@ -4,7 +4,7 @@ import { MatTableDataSource, PageEvent } from '@angular/material';
 
 import {PageTitleService} from '../../shared/services/page-title.service';
 import {ActionLogRecord} from '../../shared/records/action-log.record';
-import {GetResponse} from '../../shared/reponses/get.response';
+import {ActionLogGetResponse} from '../../shared/reponses/action-log-get.response';
 
 @Component({
   selector: 'app-pages-action-log',
@@ -39,7 +39,7 @@ export class ActionLogComponent implements OnInit {
 
     this.activeRoute.queryParams.subscribe((params: Params) => {
       this.queryParams = params;
-      this.actionLog.findWhere(params).then((response: GetResponse) => {
+      this.actionLog.findWhere(params).then((response: ActionLogGetResponse) => {
         this.length          = response.count;
         this.pageSize        = response.page_size;
         this.pageIndex       = response.page_index;
