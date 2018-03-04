@@ -21,10 +21,10 @@ export class ClientListComponent implements OnInit {
   dataSource;
 
   constructor(
-    private activeRoute:  ActivatedRoute,
     private router:       Router,
-    public  clientRecord: ClientRecord,
+    private activeRoute:  ActivatedRoute,
     private pageTitle:    PageTitleService,
+    public  clientRecord: ClientRecord,
   ) {}
 
   ngOnInit() {
