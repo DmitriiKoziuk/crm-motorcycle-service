@@ -27,8 +27,8 @@ class Vehicle extends ActiveRecord
     public function rules()
     {
         return [
-            [['vehicle_brand_id', 'model_name'], 'required'],
-            [['vehicle_brand_id'], 'integer'],
+            [['vehicle_brand_id', 'vehicle_type_id', 'model_name'], 'required'],
+            [['vehicle_brand_id', 'vehicle_type_id'], 'integer'],
             [['model_name'], 'string', 'max' => 150],
             [['model_name'], 'unique'],
             [
@@ -37,6 +37,13 @@ class Vehicle extends ActiveRecord
                 'skipOnError' => true,
                 'targetClass' => VehicleBrand::class,
                 'targetAttribute' => ['vehicle_brand_id' => 'id']
+            ],
+            [
+                ['vehicle_type_id'],
+                'exist',
+                'skipOnError' => true,
+                'targetClass' => VehicleType::class,
+                'targetAttribute' => ['vehicle_type_id' => 'id']
             ],
         ];
     }
@@ -49,6 +56,7 @@ class Vehicle extends ActiveRecord
         return [
             'id'               => 'ID',
             'vehicle_brand_id' => 'Vehicle Brand ID',
+            'vehicle_type_id'  => 'Vehicle Type ID',
             'model_name'       => 'Model Name',
         ];
     }
