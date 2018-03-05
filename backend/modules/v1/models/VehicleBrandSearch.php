@@ -41,6 +41,11 @@ class VehicleBrandSearch extends VehicleBrand
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'id' => SORT_DESC,
+                ]
+            ],
             'pagination' => [
                 'pageSize' => $this->page_size,
                 'page'     => $this->page_index,
