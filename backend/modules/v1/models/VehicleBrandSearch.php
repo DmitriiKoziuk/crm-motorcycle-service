@@ -57,7 +57,7 @@ class VehicleBrandSearch extends VehicleBrand
         }
 
         $query->FilterWhere([
-            Vehicle::tableName().'.id' => $this->id,
+            VehicleBrand::tableName().'.id' => $this->id,
         ]);
 
         return $dataProvider;
