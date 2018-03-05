@@ -4,7 +4,7 @@ import { MatTableDataSource, PageEvent } from '@angular/material';
 
 import { PageTitleService } from '../../../../shared/services/page-title.service';
 import { VehicleTypeRecord } from '../../../../shared/records/vehicle-type.record';
-import { GetResponse } from '../../../../shared/reponses/get.response';
+import { VehicleTypeGetResponse } from '../../../../shared/reponses/get/vehicle-type.get.response';
 
 @Component({
   selector:    'app-pages-vehicle-type-list',
@@ -35,7 +35,7 @@ export class VehicleTypeListComponent implements OnInit {
 
     this.activeRoute.queryParams.subscribe((params: Params) => {
       this.queryParams = params;
-      this.vehicleTypeRecord.findWhere(params).then((response: GetResponse) => {
+      this.vehicleTypeRecord.findWhere(params).then((response: VehicleTypeGetResponse) => {
         this.length          = response.count;
         this.pageSize        = response.page_size;
         this.pageIndex       = response.page_index;
