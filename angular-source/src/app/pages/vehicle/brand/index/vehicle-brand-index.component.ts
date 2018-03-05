@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MatTableDataSource, PageEvent } from '@angular/material';
 
@@ -11,7 +11,7 @@ import { VehicleBrandGetResponse } from '../../../../shared/reponses/get/vehicle
   templateUrl: './vehicle-brand-index.component.html',
   providers:   [VehicleBrandRecord]
 })
-export class VehicleBrandIndexComponent {
+export class VehicleBrandIndexComponent implements OnInit {
   displayedColumns = ['id', 'name', 'actions'];
   length           = 100;
   pageSize         = 20;
@@ -28,7 +28,7 @@ export class VehicleBrandIndexComponent {
   ) {}
 
   ngOnInit() {
-    this.pageTitle.set('Vehicle type');
+    this.pageTitle.set('Vehicle brand');
 
     this.dataSource      = new MatTableDataSource();
     this.dataSource.data = [];
