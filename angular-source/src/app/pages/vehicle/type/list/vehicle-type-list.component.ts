@@ -12,7 +12,7 @@ import { VehicleTypeGetResponse } from '../../../../shared/reponses/get/vehicle-
   providers:   [VehicleTypeRecord]
 })
 export class VehicleTypeListComponent implements OnInit {
-  displayedColumns = ['id', 'name'];
+  displayedColumns = ['id', 'name', 'actions'];
   length           = 100;
   pageSize         = 20;
   pageIndex        = 0;

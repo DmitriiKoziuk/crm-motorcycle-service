@@ -1,1 +1,30 @@
-Client type create.
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <form
+          [formGroup]="vehicleTypeRecord.attributes"
+          class="mat-elevation-z2 background-white"
+          [ngClass]="{
+            'valid': vehicleTypeRecord.attributes.valid,
+            'not-valid': !vehicleTypeRecord.attributes.valid
+          }"
+      >
+        <mat-form-field>
+          <input matInput placeholder="Type name" formControlName="name">
+          <mat-error *ngIf="vehicleTypeRecord.isAttributeNotValid('name')">
+            {{vehicleTypeRecord.getAttributeError('name')}}
+          </mat-error>
+          <mat-hint align="end">{{vehicleTypeRecord.attributes.get('name').value.length}} / {{vehicleTypeRecord.maxLength}}</mat-hint>
+        </mat-form-field>
+      </form>
+
+      <button
+          mat-raised-button
+          color="primary"
+          (click)="save()"
+          style="margin-top: 20px;"
+          [disabled]="!isCanSave()"
+      >Save</button>
+    </div>
+  </div>
+</div>
