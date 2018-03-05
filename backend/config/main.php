@@ -67,7 +67,7 @@ return [
                 [
                     'class'      => 'yii\rest\UrlRule',
                     'pluralize'   => false,
-                    'controller' => 'v1/vehicle-type'
+                    'controller' => ['v1/vehicle/type' => 'v1/vehicle-type']
                 ],
                 [
                     'class'      => 'yii\rest\UrlRule',
