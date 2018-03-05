@@ -5,7 +5,7 @@ import { VehicleTypeRecord } from '../../../../shared/records/vehicle-type.recor
 import { PageTitleService } from '../../../../shared/services/page-title.service';
 
 @Component({
-  selector:    'app-page-client-type-create',
+  selector:    'app-page-vehicle-type-create',
   templateUrl: './vehicle-type-create.component.html',
   providers:   [VehicleTypeRecord],
 })
