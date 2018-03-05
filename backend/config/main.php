@@ -72,6 +72,11 @@ return [
                 [
                     'class'      => 'yii\rest\UrlRule',
                     'pluralize'  => false,
+                    'controller' => ['v1/vehicle/brand' => 'v1/vehicle-brand'],
+                ],
+                [
+                    'class'      => 'yii\rest\UrlRule',
+                    'pluralize'  => false,
                     'controller' => 'v1/action-log',
                 ],
                 [
