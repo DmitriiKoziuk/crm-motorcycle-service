@@ -51,39 +51,39 @@ return [
             'rules' => [
                 [
                     'class'      => 'yii\rest\UrlRule',
-                    'pluralize'   => false,
-                    'controller' => 'v1/user'
+                    'pluralize'  => false,
+                    'controller' => 'v1/user',
+                ],
+                [
+                    'class'      => 'yii\rest\UrlRule',
+                    'pluralize'  => false,
+                    'controller' => 'v1/client',
                 ],
                 [
                     'class'      => 'yii\rest\UrlRule',
                     'pluralize'   => false,
-                    'controller' => 'v1/client'
+                    'controller' => 'v1/vehicle',
                 ],
                 [
                     'class'      => 'yii\rest\UrlRule',
-                    'pluralize'   => false,
-                    'controller' => 'v1/vehicle'
+                    'pluralize'  => false,
+                    'controller' => ['v1/vehicle/type' => 'v1/vehicle-type'],
                 ],
                 [
                     'class'      => 'yii\rest\UrlRule',
-                    'pluralize'   => false,
-                    'controller' => ['v1/vehicle/type' => 'v1/vehicle-type']
+                    'pluralize'  => false,
+                    'controller' => 'v1/action-log',
                 ],
                 [
                     'class'      => 'yii\rest\UrlRule',
-                    'pluralize'   => false,
-                    'controller' => 'v1/action-log'
-                ],
-                [
-                    'class'      => 'yii\rest\UrlRule',
-                    'pluralize'   => false,
-                    'controller' => 'v1/login'
+                    'pluralize'  => false,
+                    'controller' => 'v1/login',
                 ],
                 'POST,OPTIONS v1/login/check' => 'v1/login/check',
                 [
                     'class'      => 'yii\rest\UrlRule',
-                    'pluralize'   => false,
-                    'controller' => 'v1/role'
+                    'pluralize'  => false,
+                    'controller' => 'v1/role',
                 ],
             ],
         ],
