@@ -16,7 +16,7 @@ class VehicleBrandSearch extends VehicleBrand
     {
         return [
             [
-                ['id'], 'string'
+                ['id', 'name'], 'string'
             ],
             [
                 ['page_size', 'page_index'], 'integer'
@@ -57,7 +57,11 @@ class VehicleBrandSearch extends VehicleBrand
         }
 
         $query->FilterWhere([
-            VehicleBrand::tableName().'.id' => $this->id,
+            VehicleBrand::tableName().'.id'   => $this->id,
+        ]);
+
+        $query->filterWhere([
+            'like', VehicleBrand::tableName().'.name', $this->name,
         ]);
 
         return $dataProvider;
