@@ -7,6 +7,8 @@ import { VehicleListModule } from './list/vehicle-list.module';
 
 const ROUTES: Routes = [
   {path: '', component: VehicleListComponent},
+  {path: 'type', loadChildren: './type/vehicle-type.module#VehicleTypeModule'},
+  {path: 'brand', loadChildren: './brand/vehicle-brand.module#VehicleTypeModule'},
 ];
 
 @NgModule({
