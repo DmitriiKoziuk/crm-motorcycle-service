@@ -42,4 +42,32 @@ class VehicleType extends ActiveRecord
             'name' => 'Name',
         ];
     }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+
+        if ((true === $insert) || (false === $insert && ! empty($changedAttributes))) {
+            ActionLog::write(
+                'vehicle_type',
+                $this->id,
+                (true === $insert ? ActionLog::ACTION_TYPE_CREATE : ActionLog::ACTION_TYPE_UPDATE),
+                (true === $insert ? '' : serialize($changedAttributes)),
+                $this->getAttributes(array_keys($changedAttributes))
+            );
+        }
+    }
+
+    public function afterDelete()
+    {
+        parent::afterDelete();
+
+        ActionLog::write(
+            'vehicle_type',
+            $this->id,
+            ActionLog::ACTION_TYPE_DELETE,
+            $this->getAttributes(),
+            ''
+        );
+    }
 }
