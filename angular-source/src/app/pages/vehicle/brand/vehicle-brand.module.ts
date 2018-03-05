@@ -6,7 +6,9 @@ import { VehicleBrandIndexComponent } from './index/vehicle-brand-index.componen
 
 
 const ROUTES: Routes = [
-  {path: '', component: VehicleBrandIndexComponent}
+  {path: '', component: VehicleBrandIndexComponent},
+  {path: 'create', loadChildren: './create-update/vehicle-brand-create-update.module#VehicleBrandCreateUpdateModule'},
+  {path: ':id', loadChildren: './create-update/vehicle-brand-create-update.module#VehicleBrandCreateUpdateModule'},
 ];
 
 @NgModule({
@@ -18,4 +20,4 @@ const ROUTES: Routes = [
     RouterModule,
   ],
 })
-export class VehicleTypeModule {}
+export class VehicleBrandModule {}
