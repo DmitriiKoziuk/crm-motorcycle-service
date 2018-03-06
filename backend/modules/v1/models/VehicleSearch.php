@@ -7,7 +7,7 @@ use yii\data\ActiveDataProvider;
 
 class VehicleSearch extends Vehicle
 {
-    public $page_size  = 2;
+    public $page_size  = 20;
     public $page_index = 0;
 
     /**
