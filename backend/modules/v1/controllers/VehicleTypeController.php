@@ -51,7 +51,7 @@ class VehicleTypeController extends Controller
     {
         try {
             $queryParams = Yii::$app->getRequest()->getBodyParams();
-            $vehicleType = VehicleTypeAction::create($queryParams);
+            $vehicleType = VehicleTypeAction::create($queryParams['name']);
             return $vehicleType;
         } catch (\Exception $e) {
             return ['error' => $e->getMessage()];

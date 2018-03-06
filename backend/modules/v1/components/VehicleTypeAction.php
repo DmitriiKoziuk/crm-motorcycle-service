@@ -7,11 +7,11 @@ use backend\modules\v1\models\VehicleType;
 
 class VehicleTypeAction
 {
-    public static function create(array $params)
+    public static function create(string $name)
     {
-        $transaction = Yii::$app->db->beginTransaction();
-        $vehicleType = new VehicleType();
-        $vehicleType->setAttributes($params);
+        $transaction       = Yii::$app->db->beginTransaction();
+        $vehicleType       = new VehicleType();
+        $vehicleType->name = $name;
 
         try {
             if (! $vehicleType->validate()) {
@@ -75,7 +75,7 @@ class VehicleTypeAction
                     ->one();
 
                 if (empty($vehicleType)) {
-                    $vehicleType = static::create(['name' => $name]);
+                    $vehicleType = static::create($name);
                 }
             }
 
