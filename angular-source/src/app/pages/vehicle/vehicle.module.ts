@@ -8,6 +8,8 @@ const ROUTES: Routes = [
   {path: '', component: VehicleListComponent},
   {path: 'type', loadChildren: './type/vehicle-type.module#VehicleTypeModule'},
   {path: 'brand', loadChildren: './brand/vehicle-brand.module#VehicleBrandModule'},
+  {path: 'create', loadChildren: './create-update/vehicle-create-update.module#VehicleCreateUpdateModule'},
+  {path: ':id', loadChildren: './create-update/vehicle-create-update.module#VehicleCreateUpdateModule'},
 ];
 
 @NgModule({
