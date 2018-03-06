@@ -8,6 +8,7 @@ use yii\db\ActiveRecord;
  * This is the model class for table "{{%vehicle}}".
  *
  * @property int    $id
+ * @property int    $vehicle_type_id
  * @property int    $vehicle_brand_id
  * @property string $model_name
  */
