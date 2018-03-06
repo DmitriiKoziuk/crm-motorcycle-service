@@ -2,6 +2,7 @@
 namespace backend\modules\v1\components;
 
 use Yii;
+use yii\db\Expression;
 use backend\modules\v1\models\VehicleType;
 
 class VehicleTypeAction
@@ -55,5 +56,36 @@ class VehicleTypeAction
         }
 
         return $vehicleType;
+    }
+
+    public static function findOrCreate($id = null, $name = null)
+    {
+        try {
+            $vehicleType = null;
+
+            if (! empty($id)) {
+                $vehicleType = VehicleType::find()
+                    ->where(['id' => new Expression(':id')], [':id' => $id])
+                    ->one();
+            }
+
+            if (empty($id) && ! empty($name)) {
+                $vehicleType = VehicleType::find()
+                    ->where(['name' => new Expression(':name')], [':name' => $name])
+                    ->one();
+
+                if (empty($vehicleType)) {
+                    $vehicleType = static::create(['name' => $name]);
+                }
+            }
+
+            if (empty($vehicleType)) {
+                throw new \Exception('Can`t find or create vehicle type');
+            }
+
+            return $vehicleType;
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
     }
 }

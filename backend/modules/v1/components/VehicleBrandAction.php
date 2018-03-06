@@ -2,6 +2,7 @@
 namespace backend\modules\v1\components;
 
 use Yii;
+use yii\db\Expression;
 use backend\modules\v1\models\VehicleBrand;
 
 class VehicleBrandAction
@@ -55,5 +56,36 @@ class VehicleBrandAction
         }
 
         return $vehicleBrand;
+    }
+
+    public static function findOrCreate($id = null, $name = null)
+    {
+        try {
+            $vehicleBrand = null;
+
+            if (! empty($id)) {
+                $vehicleBrand = VehicleBrand::find()
+                    ->where(['id' => new Expression(':id')], [':id' => $id])
+                    ->one();
+            }
+
+            if (empty($id) && ! empty($name)) {
+                $vehicleBrand = VehicleBrand::find()
+                    ->where(['name' => new Expression(':name')], [':name' => $name])
+                    ->one();
+
+                if (empty($vehicleBrand)) {
+                    $vehicleBrand = static::create(['name' => $name]);
+                }
+            }
+
+            if (empty($vehicleBrand)) {
+                throw new \Exception('Can`t find or create vehicle brand');
+            }
+
+            return $vehicleBrand;
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
     }
 }
