@@ -7,7 +7,7 @@ interface ViewResponseInterface
 {
     public static function generate(
         ActiveRecord $activeRecord,
-        $includeAttribute = null,
-        $exceptAttributes = []
+        $includeAttributes = null,
+        $exceptAttributes  = []
     );
 }

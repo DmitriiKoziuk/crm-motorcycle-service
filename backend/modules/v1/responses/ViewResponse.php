@@ -8,9 +8,9 @@ class ViewResponse implements ViewResponseInterface
 {
     public static function generate(
         ActiveRecord $activeRecord,
-        $includeAttribute = null,
+        $includeAttributes = null,
         $exceptAttributes = []
     ) {
-        return $activeRecord->getAttributes($includeAttribute, $exceptAttributes);
+        return $activeRecord->getAttributes($includeAttributes, $exceptAttributes);
     }
 }
