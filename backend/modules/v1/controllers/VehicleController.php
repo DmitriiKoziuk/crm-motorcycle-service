@@ -79,7 +79,7 @@ class VehicleController extends Controller
                 $vehicleType,
                 $vehicleBrand
             );
-            return CreateResponse::generate($vehicle);
+            return CreateResponse::generate($vehicle, ['id', 'type', 'brand', 'model_name']);
         } catch (\Exception $e) {
             return ['error' => $e->getMessage()];
         }
