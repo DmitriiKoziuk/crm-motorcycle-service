@@ -8,9 +8,9 @@ class CreateResponse implements CreateResponseInterface
 {
     public static function generate(
         ActiveRecord $activeRecord,
-        $includeAttribute = null,
-        $executeAttribute = []
+        $includeAttributes = null,
+        $executeAttributes = []
     ) {
-        return $activeRecord->getAttributes($includeAttribute, $executeAttribute);
+        return $activeRecord->getAttributes($includeAttributes, $executeAttributes);
     }
 }
