@@ -8,6 +8,6 @@ interface ViewResponseInterface
     public static function generate(
         ActiveRecord $activeRecord,
         $includeAttribute = null,
-        $executeAttribute = []
+        $exceptAttributes = []
     );
 }
