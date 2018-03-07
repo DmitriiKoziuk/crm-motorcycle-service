@@ -97,9 +97,4 @@ export class VehicleCreateUpdateComponent implements OnInit {
       }
     });
   }
-
-  check() {
-    console.log('Brand list', this.vehicleBrandList);
-    console.log('Values', this.vehicleRecord.attributes.getRawValue());
-  }
 }
