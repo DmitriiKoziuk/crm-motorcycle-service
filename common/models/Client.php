@@ -11,8 +11,6 @@ use yii\db\ActiveRecord;
  * @property string $first_name
  * @property string $family_name
  * @property string $middle_name
- *
- * @property ClientTelephone[] $telephones
  */
 class Client extends ActiveRecord
 {
@@ -47,14 +45,6 @@ class Client extends ActiveRecord
             'family_name' => 'Family Name',
             'middle_name' => 'Middle Name',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getTelephones()
-    {
-        return $this->hasMany(ClientTelephone::class, ['client_id' => 'id']);
     }
 
     public function afterSave($insert, $changedAttributes)

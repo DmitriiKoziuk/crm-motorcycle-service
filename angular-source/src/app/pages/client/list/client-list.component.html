@@ -13,13 +13,11 @@
     <div class="col-md-12">
       <div class="mat-elevation-z2 background-white">
         <mat-table #table [dataSource]="dataSource">
-          <!-- ID Column -->
           <ng-container matColumnDef="id">
             <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
           </ng-container>
 
-          <!-- Name Column -->
           <ng-container matColumnDef="name">
             <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
             <mat-cell *matCellDef="let element">
@@ -29,13 +27,24 @@
             </mat-cell>
           </ng-container>
 
-          <!-- Symbol Column -->
           <ng-container matColumnDef="tel">
             <mat-header-cell *matHeaderCellDef> Telephone </mat-header-cell>
             <mat-cell *matCellDef="let element">
               <div *ngFor="let telephone of element.telephones">
                 <div>{{telephone.number | appTelephone}}</div>
                 <div *ngIf="telephone.note !== null">{{telephone.note}}</div>
+              </div>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="vehicle">
+            <mat-header-cell *matHeaderCellDef> Vehicle </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <div *ngFor="let vehicle of element.vehicles">
+                <div>{{vehicle.type}}</div>
+                <div>{{vehicle.brand_name}} {{vehicle.model_name}}</div>
+                <div>{{vehicle.vin}}</div>
+                <div>{{vehicle.note}}</div>
               </div>
             </mat-cell>
           </ng-container>

@@ -80,7 +80,7 @@ export class ClientCreateComponent implements OnInit {
         ! this.queryParams.hasOwnProperty('id') &&
           response.hasOwnProperty('id')
       ) {
-        this.router.navigate(['/client/' + response['id']]);
+        this.router.navigate([this.clientRecord.getUrl() + '/' + response['id']]);
       }
     });
   }
