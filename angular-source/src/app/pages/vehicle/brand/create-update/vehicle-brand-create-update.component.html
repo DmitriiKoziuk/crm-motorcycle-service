@@ -1,0 +1,30 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <form
+          [formGroup]="vehicleBrandRecord.attributes"
+          class="mat-elevation-z2 background-white"
+          [ngClass]="{
+            'valid': vehicleBrandRecord.attributes.valid,
+            'not-valid': !vehicleBrandRecord.attributes.valid
+          }"
+      >
+        <mat-form-field>
+          <input matInput placeholder="Type name" formControlName="name">
+          <mat-error *ngIf="vehicleBrandRecord.isAttributeNotValid('name')">
+            {{vehicleBrandRecord.getAttributeError('name')}}
+          </mat-error>
+          <mat-hint align="end">{{vehicleBrandRecord.attributes.get('name').value.length}} / {{vehicleBrandRecord.maxLength}}</mat-hint>
+        </mat-form-field>
+      </form>
+
+      <button
+          mat-raised-button
+          color="primary"
+          (click)="save()"
+          style="margin-top: 20px;"
+          [disabled]="!isCanSave()"
+      >Save</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+<div class="wrapper">
+  <nav id="sidebar" [ngClass]="{'active': isSidebarActive}">
+    <!-- Sidebar Header -->
+    <div class="sidebar-header">
+      <h3>Hello</h3>
+    </div>
+
+    <!-- Sidebar Links -->
+    <ul class="list-unstyled components">
+      <li routerLinkActive="active">
+        <a [routerLink]="'/dashboard'">
+          <i class="fa fa-desktop"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <li routerLinkActive="active">
+        <a [routerLink]="'/user'">
+          <i class="fa fa-users"></i>
+          <span>Users</span>
+        </a>
+      </li>
+      <li routerLinkActive="active">
+        <a [routerLink]="'/client'">
+          <i class="fa fa-users"></i>
+          <span>Clients</span>
+        </a>
+      </li>
+      <li routerLinkActive="active">
+        <a [routerLink]="'/vehicle'">
+          <i class="fa fa-users"></i>
+          <span>Vehicle</span>
+        </a>
+      </li>
+      <li routerLinkActive="active">
+        <a [routerLink]="'/vehicle/type'">
+          <i class="fa fa-users"></i>
+          <span>Vehicle type</span>
+        </a>
+      </li>
+      <li routerLinkActive="active">
+        <a [routerLink]="'/vehicle/brand'">
+          <i class="fa fa-users"></i>
+          <span>Vehicle brand</span>
+        </a>
+      </li>
+      <li routerLinkActive="active">
+        <a [routerLink]="'/action-log'">
+          <i class="fa fa-users"></i>
+          <span>Action log</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div id="content">
+    <nav class="navbar">
+      <button type="button" class="btn toggle-button" (click)="toggleSidebar()">
+        <i class="fa fa-align-justify"></i>
+      </button>
+    </nav>
+
+    <div class="page-title-box">
+      <span>
+        {{pageTitle.get()}}
+      </span>
+    </div>
+
+    <router-outlet></router-outlet>
+  </div>
+</div>

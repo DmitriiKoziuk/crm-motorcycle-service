@@ -1,0 +1,24 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>Hello</span>
+    <span class="spacer"></span>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-menu #menu="matMenu">
+  <a mat-menu-item>
+    <mat-icon>account_circle</mat-icon>
+    <span>My Profile</span>
+  </a>
+  <button mat-menu-item>
+    <mat-icon>attach_money</mat-icon>
+    <span>Payment</span>
+  </button>
+  <button mat-menu-item (click)="logOut()">
+    <mat-icon>exit_to_app</mat-icon>
+    <span>Log Out</span>
+  </button>
+</mat-menu>

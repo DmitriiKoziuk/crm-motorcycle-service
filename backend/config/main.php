@@ -11,10 +11,17 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => [
+        'v1' => [
+            'class' => 'backend\modules\v1\Module',
+        ],
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ]
         ],
         'user' => [
             'identityClass' => 'common\models\User',
@@ -37,14 +44,54 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
+            'enableStrictParsing' => true,
             'showScriptName' => false,
             'rules' => [
+                [
+                    'class'      => 'yii\rest\UrlRule',
+                    'pluralize'  => false,
+                    'controller' => 'v1/user',
+                ],
+                [
+                    'class'      => 'yii\rest\UrlRule',
+                    'pluralize'  => false,
+                    'controller' => 'v1/client',
+                ],
+                [
+                    'class'      => 'yii\rest\UrlRule',
+                    'pluralize'   => false,
+                    'controller' => 'v1/vehicle',
+                ],
+                [
+                    'class'      => 'yii\rest\UrlRule',
+                    'pluralize'  => false,
+                    'controller' => ['v1/vehicle/type' => 'v1/vehicle-type'],
+                ],
+                [
+                    'class'      => 'yii\rest\UrlRule',
+                    'pluralize'  => false,
+                    'controller' => ['v1/vehicle/brand' => 'v1/vehicle-brand'],
+                ],
+                [
+                    'class'      => 'yii\rest\UrlRule',
+                    'pluralize'  => false,
+                    'controller' => 'v1/action-log',
+                ],
+                [
+                    'class'      => 'yii\rest\UrlRule',
+                    'pluralize'  => false,
+                    'controller' => 'v1/login',
+                ],
+                'POST,OPTIONS v1/login/check' => 'v1/login/check',
+                [
+                    'class'      => 'yii\rest\UrlRule',
+                    'pluralize'  => false,
+                    'controller' => 'v1/role',
+                ],
             ],
         ],
-        */
     ],
     'params' => $params,
 ];

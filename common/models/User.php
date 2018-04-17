@@ -20,6 +20,9 @@ use yii\web\IdentityInterface;
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $password write-only password
+ * @property string $access_token
+ *
+ * @property UserProfile $profile
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -57,6 +60,14 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProfile()
+    {
+        return $this->hasOne(UserProfile::className(), ['user_id' => 'id']);
+    }
+
+    /**
      * @inheritdoc
      */
     public static function findIdentity($id)
@@ -69,7 +80,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
+        return static::findOne(['access_token' => $token]);
     }
 
     /**
@@ -171,6 +182,11 @@ class User extends ActiveRecord implements IdentityInterface
         $this->auth_key = Yii::$app->security->generateRandomString();
     }
 
+    public function generateAccessToken()
+    {
+        $this->access_token = Yii::$app->security->generateRandomString();
+    }
+
     /**
      * Generates new password reset token
      */
@@ -185,5 +201,58 @@ class User extends ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+
+    public static function create($username, $email, $password) {
+        $transaction = Yii::$app->db->beginTransaction();
+
+        try {
+            $isUserExist = static::find()
+                ->where([
+                    'username' => $username
+                ])
+                ->one();
+
+            if (! empty($isUserExist)) {
+                throw new \Exception("User '{$username}' already exist");
+            }
+
+            $user           = new static();
+            $user->username = $username;
+            $user->email    = $email;
+            $user->setPassword($password);
+            $user->generateAuthKey();
+            $user->generateAccessToken();
+
+            if (! $user->validate()) {
+                throw new \Exception('Not valid data');
+            }
+
+            if (! $user->save()) {
+                throw new \Exception("Can't save user");
+            }
+
+            UserProfile::create($user);
+
+            $transaction->commit();
+        } catch (\Exception $e) {
+            $transaction->rollBack();
+            throw new \Exception($e->getMessage());
+        }
+
+        return true;
+    }
+
+    public function beforeDelete()
+    {
+        if (!parent::beforeDelete()) {
+            return false;
+        }
+
+        if (! empty($this->userProfile)) {
+            $this->profile->delete();
+        }
+
+        return true;
     }
 }

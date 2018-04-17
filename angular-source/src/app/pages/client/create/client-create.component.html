@@ -1,0 +1,100 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <form
+          [formGroup]="clientRecord.attributes"
+          class="mat-elevation-z2 background-white"
+          [ngClass]="{
+            'valid': clientRecord.attributes.valid,
+            'not-valid': !clientRecord.attributes.valid
+          }"
+      >
+        <div class="row">
+          <div class="col-md-4">
+            <mat-form-field>
+              <input matInput placeholder="First name" formControlName="first_name">
+              <mat-error *ngIf="clientRecord.isAttributeNotValid('first_name')">
+                {{clientRecord.getAttributeError('first_name')}}
+              </mat-error>
+              <mat-hint align="end">{{clientRecord.attributes.get('first_name').value.length}} / {{clientRecord.maxLength}}</mat-hint>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field>
+              <input matInput placeholder="Family name" formControlName="family_name">
+              <mat-error *ngIf="clientRecord.isAttributeNotValid('family_name')">
+                {{clientRecord.getAttributeError('family_name')}}
+              </mat-error>
+              <mat-hint align="end">{{clientRecord.attributes.get('family_name').value.length}} / {{clientRecord.maxLength}}</mat-hint>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field>
+              <input matInput placeholder="Middle name" formControlName="middle_name">
+              <mat-error *ngIf="clientRecord.isAttributeNotValid('middle_name')">
+                {{clientRecord.getAttributeError('middle_name')}}
+              </mat-error>
+              <mat-hint align="end">{{clientRecord.attributes.get('middle_name').value.length}} / {{clientRecord.maxLength}}</mat-hint>
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
+
+      <form
+          [formGroup]="telephoneForm"
+          class="mat-elevation-z2 background-white"
+          style="margin-top: 20px;"
+          [ngClass]="{
+            'valid': clientRecord.attributes.get('telephones').value.length,
+            'not-valid': !clientRecord.attributes.get('telephones').value.length
+          }"
+      >
+        <div class="row">
+          <div class="col-md-4">
+            <mat-form-field>
+              <input matInput placeholder="Telephone number" formControlName="number" [(ngModel)]="telephoneForm.get('number').value">
+              <mat-hint align="end">{{telephoneForm.get('number').value.length}} / {{13}}</mat-hint>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field>
+              <input matInput placeholder="Note" formControlName="note">
+              <mat-hint align="end">{{telephoneForm.get('note').value.length}} / {{150}}</mat-hint>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <button type="button" [disabled]="! telephoneForm.valid" mat-raised-button color="primary" (click)="addTelephone()">+</button>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="row" *ngFor="let telephone of clientRecord.attributes.get('telephones').controls; let i = index">
+              <div class="col-md-4">
+                <mat-form-field>
+                  <input matInput placeholder="Telephone number" [formControl]="telephone.controls['number']">
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field>
+                  <input matInput placeholder="Note" [formControl]="telephone.controls['note']">
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <button mat-raised-button color="warn" (click)="removeTelephone(i)">-</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <button
+          mat-raised-button
+          color="primary"
+          (click)="save()"
+          style="margin-top: 20px;"
+          [disabled]="!isCanSave()"
+      >Save</button>
+    </div>
+  </div>
+</div>

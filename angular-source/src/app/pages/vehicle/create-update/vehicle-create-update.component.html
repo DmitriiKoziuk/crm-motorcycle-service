@@ -1,0 +1,66 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <form
+          [formGroup]="vehicleRecord.attributes"
+          class="mat-elevation-z2 background-white"
+          [ngClass]="{
+            'valid': vehicleRecord.attributes.valid,
+            'not-valid': !vehicleRecord.attributes.valid
+          }"
+      >
+        <div class="row">
+          <div class="col-md-3">
+            <mat-form-field class="example-full-width">
+              <input type="text"
+                     placeholder="Vehicle type"
+                     matInput
+                     [formControl]="vehicleRecord.attributes.get('type.name')"
+                     [matAutocomplete]="vehicleTypeAuto"
+              >
+              <mat-autocomplete #vehicleTypeAuto="matAutocomplete">
+                <mat-option *ngFor="let vehicleType of vehicleTypeList" [value]="vehicleType.name">
+                  {{ vehicleType.name }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3">
+            <mat-form-field class="example-full-width">
+              <input type="text"
+                     placeholder="Vehicle brand"
+                     matInput
+                     [formControl]="vehicleRecord.attributes.get('brand.name')"
+                     [matAutocomplete]="vehicleBrandAuto"
+              >
+              <mat-autocomplete #vehicleBrandAuto="matAutocomplete">
+                <mat-option *ngFor="let vehicleBrand of vehicleBrandList" [value]="vehicleBrand.name">
+                  {{ vehicleBrand.name }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-6">
+            <mat-form-field>
+              <input matInput placeholder="Model name" formControlName="model_name">
+              <mat-error *ngIf="vehicleRecord.isAttributeNotValid('model_name')">
+                {{vehicleRecord.getAttributeError('model_name')}}
+              </mat-error>
+              <mat-hint align="end">{{vehicleRecord.attributes.get('model_name').value.length}} / {{vehicleRecord.maxLength}}</mat-hint>
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
+
+      <button
+          mat-raised-button
+          color="primary"
+          (click)="save()"
+          style="margin-top: 20px;"
+          [disabled]="!isCanSave()"
+      >Save</button>
+    </div>
+  </div>
+</div>
