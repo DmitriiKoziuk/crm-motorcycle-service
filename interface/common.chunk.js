@@ -331,6 +331,7 @@ var ClientRecord = (function (_super) {
                 __WEBPACK_IMPORTED_MODULE_1__angular_forms__["l" /* Validators */].maxLength(_this.maxLength),
             ]),
             telephones: new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* FormArray */]([]),
+            vehicles: new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* FormArray */]([]),
         });
         return _this;
     }
