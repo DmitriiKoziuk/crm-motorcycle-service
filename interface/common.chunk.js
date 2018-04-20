@@ -338,6 +338,8 @@ var ClientRecord = (function (_super) {
     ClientRecord.prototype.getUrl = function () {
         return '/client';
     };
+    ClientRecord.prototype.addVehicle = function (vehicle) {
+    };
     return ClientRecord;
 }(__WEBPACK_IMPORTED_MODULE_0__active_record__["a" /* ActiveRecord */]));
 
