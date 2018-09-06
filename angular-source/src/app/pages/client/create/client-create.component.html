@@ -88,6 +88,50 @@
         </div>
       </form>
 
+      <form
+          [formGroup]="vehicleForm"
+          class="mat-elevation-z2 background-white"
+          style="margin-top: 20px;"
+          [ngClass]="{
+            'valid':      clientRecord.attributes.get('vehicles').value.length,
+            'not-valid': !clientRecord.attributes.get('vehicles').value.length
+          }"
+      >
+        <div class="row">
+          <div class="col-md-4">
+            <mat-form-field>
+              <input matInput
+                     placeholder="Vehicle name"
+                     formControlName="name"
+                     [(ngModel)]="vehicleForm.get('name').value"
+                     [matAutocomplete]="vehicleTypeAuto"
+              >
+              <mat-autocomplete #vehicleTypeAuto="matAutocomplete" [displayWith]="selectedVehicle" (optionSelected)="changeVehicle($event)">
+                <mat-option *ngFor="let vehicle of vehicleList" [value]="vehicle">
+                  {{vehicle.getFullName()}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+          <div class="col-md-2">
+            <mat-form-field>
+              <input matInput placeholder="Vin" formControlName="vin">
+              <mat-hint align="end">{{vehicleForm.get('vin').value.length}} / {{17}}</mat-hint>
+            </mat-form-field>
+          </div>
+          <div class="col-md-2">
+            <mat-form-field>
+              <input matInput placeholder="Note" formControlName="note">
+              <mat-hint align="end">{{vehicleForm.get('note').value.length}} / {{150}}</mat-hint>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <button type="button" [disabled]="! vehicleForm.valid" mat-raised-button color="primary" (click)="addVehicle()">+</button>
+          </div>
+        </div>
+
+      </form>
+
       <button
           mat-raised-button
           color="primary"

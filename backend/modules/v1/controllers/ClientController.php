@@ -47,7 +47,11 @@ class ClientController extends Controller
     {
         /** @var Client $client */
         $client = Client::find()
-            ->with(['telephones'])
+            ->with([
+                'telephones',
+                'vehicles.vehicle.type',
+                'vehicles.vehicle.brand',
+            ])
             ->where(['id' => $id])
             ->one();
         return ClientViewResponse::generate($client);

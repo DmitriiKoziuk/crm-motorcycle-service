@@ -15,12 +15,7 @@ class VehicleIndexResponse extends IndexResponse
          * @var Vehicle $model
          */
         foreach ($dataProvider->getModels() as $key => $model) {
-            $result[ $key ] = [
-                'id'         => $model->id,
-                'type'       => $model->type->name,
-                'brand_name' => $model->brand->name,
-                'model_name' => $model->model_name,
-            ];
+            $result[ $key ] = $model->getAttributes(['id', 'type', 'brand', 'model_name']);
         }
 
         return $result;

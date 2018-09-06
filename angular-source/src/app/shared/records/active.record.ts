@@ -3,9 +3,13 @@ import { FormArray, FormControl, FormGroup } from '@angular/forms';
 
 import { ApiService } from '../services/api.service';
 import { isObject } from 'util';
+import { GetResponse } from '../reponses/get.response';
 
 @Injectable()
 export class ActiveRecord {
+  protected searchParams          = {};
+  protected returnResultAsRawData = false;
+
   attributes = new FormGroup({
     id: new FormControl(''),
   });
@@ -108,6 +112,43 @@ export class ActiveRecord {
         if (data['error']) {
           reject(data['error']);
         } else {
+          resolve(data);
+        }
+      });
+    });
+  }
+
+  find() {
+    this.searchParams   = {};
+    this.returnResultAsRawData = false;
+    return this;
+  }
+
+  where(params) {
+    this.searchParams = params;
+    return this;
+  }
+
+  resultAsRawData() {
+    this.returnResultAsRawData = true;
+    return this;
+  }
+
+  getAll() {
+    return new Promise((resolve, reject) => {
+      this.api.get(this.getUrl(), this.searchParams).subscribe((data: GetResponse) => {
+        if (data['error']) {
+          reject(data['error']);
+        } else {
+          if (! this.returnResultAsRawData) {
+            const list = [];
+            (<any[]>data.results).forEach((attributes) => {
+              const object = new (<any>this.constructor);
+              object.setAttributes(attributes);
+              list.push(object);
+            });
+            data.results = list;
+          }
           resolve(data);
         }
       });
