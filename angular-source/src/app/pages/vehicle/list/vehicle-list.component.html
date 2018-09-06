@@ -19,14 +19,14 @@
           <ng-container matColumnDef="type">
             <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
             <mat-cell *matCellDef="let element">
-              {{element.type}}
+              {{element.type.name}}
             </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="brand_name">
             <mat-header-cell *matHeaderCellDef> Brand name </mat-header-cell>
             <mat-cell *matCellDef="let element">
-              {{element.brand_name}}
+              {{element.brand.name}}
             </mat-cell>
           </ng-container>
 

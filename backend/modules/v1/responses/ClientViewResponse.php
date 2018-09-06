@@ -14,6 +14,17 @@ class ClientViewResponse
             $attributes['telephones'][] = $telephone->getAttributes(['number', 'note']);
         }
 
+        foreach ($client->vehicles as $clientVehicle) {
+            $attributes['vehicles'][] = [
+                'id'         => $clientVehicle->getId(),
+                'type'       => $clientVehicle->getType(),
+                'brand_name' => $clientVehicle->getBrandName(),
+                'model_name' => $clientVehicle->getModelName(),
+                'vin'        => $clientVehicle->getVin(),
+                'note'       => $clientVehicle->getNote(),
+            ];
+        }
+
         return $attributes;
     }
 }

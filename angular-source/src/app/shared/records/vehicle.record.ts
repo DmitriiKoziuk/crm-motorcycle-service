@@ -28,4 +28,10 @@ export class VehicleRecord extends ActiveRecord {
   public getUrl() {
     return '/vehicle';
   }
+
+  getFullName(): string {
+    return this.getAttribute('type.name') + ' ' +
+      this.getAttribute('brand.name') + ' ' +
+      this.getAttribute('model_name');
+  }
 }

@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router} from '@angular/router';
+import { MatAutocompleteSelectedEvent } from '@angular/material';
 
 import { PageTitleService } from '../../../shared/services/page-title.service';
 import { ClientRecord } from '../../../shared/records/client.record';
+import { VehicleRecord } from '../../../shared/records/vehicle.record';
+import { VehicleGetResponse } from '../../../shared/reponses/vehicle-get.response';
 
 @Component({
   selector: 'app-page-client-create',
@@ -11,10 +14,14 @@ import { ClientRecord } from '../../../shared/records/client.record';
   styleUrls: ['./client-create.component.css'],
   providers: [
     ClientRecord,
+    VehicleRecord,
   ],
 })
 export class ClientCreateComponent implements OnInit {
   protected queryParams;
+
+  public vehicleList: VehicleRecord[];
+  private _selectedVehicle = undefined;
 
   public telephoneForm = new FormGroup({
     number: new FormControl('+38', [
@@ -27,10 +34,21 @@ export class ClientCreateComponent implements OnInit {
     ]),
   });
 
+  public vehicleForm = new FormGroup({
+    name: new FormControl('', [
+      Validators.required
+    ]),
+    vin:  new FormControl('', [
+      Validators.required
+    ]),
+    note: new FormControl(''),
+  });
+
   constructor(
     private pageTitle:    PageTitleService,
     private activeRoute:  ActivatedRoute,
     private router:       Router,
+    private vehicleRecord: VehicleRecord,
     public  clientRecord: ClientRecord,
   ) {}
 
@@ -45,6 +63,12 @@ export class ClientCreateComponent implements OnInit {
         this.pageTitle.set('Create client');
       }
     });
+
+    this.vehicleRecord.find().where({})
+      .getAll()
+      .then((response: VehicleGetResponse) => {
+        this.vehicleList = <VehicleRecord[]>response.results;
+      });
   }
 
   public addTelephone(): void {
@@ -64,6 +88,22 @@ export class ClientCreateComponent implements OnInit {
 
   public removeTelephone(index: number): void {
     (<FormArray>this.clientRecord.attributes.get('telephones')).removeAt(index);
+  }
+
+  public addVehicle(): void {
+    this.clientRecord.addVehicle(
+      this._selectedVehicle,
+      this.vehicleForm.get('vin').value,
+      this.vehicleForm.get('note').value
+    );
+  }
+
+  public selectedVehicle(vehicle?: VehicleRecord): string | undefined {
+    return vehicle ? vehicle.getFullName() : undefined;
+  }
+
+  public changeVehicle(event: MatAutocompleteSelectedEvent) {
+    this._selectedVehicle = event.option.value;
   }
 
   public isCanSave() {

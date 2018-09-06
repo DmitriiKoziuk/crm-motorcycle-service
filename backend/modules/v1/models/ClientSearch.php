@@ -7,7 +7,7 @@ use yii\data\ActiveDataProvider;
 
 class ClientSearch extends Client
 {
-    public $page_size  = 2;
+    public $page_size  = 20;
     public $page_index = 0;
     public $telephone_number;
 

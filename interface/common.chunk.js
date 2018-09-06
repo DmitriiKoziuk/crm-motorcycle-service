@@ -107,6 +107,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var ActiveRecord = (function () {
     function ActiveRecord(api) {
         this.api = api;
+        this.searchParams = {};
+        this.returnResultAsRawData = false;
         this.attributes = new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* FormGroup */]({
             id: new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["c" /* FormControl */](''),
         });
@@ -222,6 +224,41 @@ var ActiveRecord = (function () {
             });
         });
     };
+    ActiveRecord.prototype.find = function () {
+        this.searchParams = {};
+        this.returnResultAsRawData = false;
+        return this;
+    };
+    ActiveRecord.prototype.where = function (params) {
+        this.searchParams = params;
+        return this;
+    };
+    ActiveRecord.prototype.resultAsRawData = function () {
+        this.returnResultAsRawData = true;
+        return this;
+    };
+    ActiveRecord.prototype.getAll = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            _this.api.get(_this.getUrl(), _this.searchParams).subscribe(function (data) {
+                if (data['error']) {
+                    reject(data['error']);
+                }
+                else {
+                    if (!_this.returnResultAsRawData) {
+                        var list_1 = [];
+                        data.results.forEach(function (attributes) {
+                            var object = new _this.constructor;
+                            object.setAttributes(attributes);
+                            list_1.push(object);
+                        });
+                        data.results = list_1;
+                    }
+                    resolve(data);
+                }
+            });
+        });
+    };
     ActiveRecord.prototype.isNewRecord = function () {
         return (this.attributes.get('id').value === '');
     };
@@ -295,8 +332,9 @@ var ActiveRecord = (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ClientRecord; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__active_record__ = __webpack_require__("../../../../../src/app/shared/records/active.record.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__active_record__ = __webpack_require__("../../../../../src/app/shared/records/active.record.ts");
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -307,6 +345,13 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
 
 
 var ClientRecord = (function (_super) {
@@ -331,14 +376,30 @@ var ClientRecord = (function (_super) {
                 __WEBPACK_IMPORTED_MODULE_1__angular_forms__["l" /* Validators */].maxLength(_this.maxLength),
             ]),
             telephones: new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* FormArray */]([]),
+            vehicles: new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["b" /* FormArray */]([]),
         });
         return _this;
     }
     ClientRecord.prototype.getUrl = function () {
         return '/client';
     };
+    ClientRecord.prototype.addVehicle = function (vehicle, vin, note) {
+        console.log('aV', vehicle);
+        this.attributes.get('vehicles').push(new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["d" /* FormGroup */]({
+            id: new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["c" /* FormControl */](vehicle.getAttribute('id')),
+            type: new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["c" /* FormControl */](vehicle.getAttribute('type.name')),
+            brand_name: new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["c" /* FormControl */](vehicle.getAttribute('brand.name')),
+            model_name: new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["c" /* FormControl */](vehicle.getAttribute('model_name')),
+            vin: new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["c" /* FormControl */](vin),
+            note: new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["c" /* FormControl */](note),
+        }));
+        console.log(this.attributes.getRawValue());
+    };
+    ClientRecord = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])()
+    ], ClientRecord);
     return ClientRecord;
-}(__WEBPACK_IMPORTED_MODULE_0__active_record__["a" /* ActiveRecord */]));
+}(__WEBPACK_IMPORTED_MODULE_2__active_record__["a" /* ActiveRecord */]));
 
 
 
@@ -549,6 +610,11 @@ var VehicleRecord = (function (_super) {
     }
     VehicleRecord.prototype.getUrl = function () {
         return '/vehicle';
+    };
+    VehicleRecord.prototype.getFullName = function () {
+        return this.getAttribute('type.name') + ' ' +
+            this.getAttribute('brand.name') + ' ' +
+            this.getAttribute('model_name');
     };
     return VehicleRecord;
 }(__WEBPACK_IMPORTED_MODULE_0__active_record__["a" /* ActiveRecord */]));
