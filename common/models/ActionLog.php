@@ -78,7 +78,7 @@ class ActionLog extends ActiveRecord
         $newData
     ) {
         $newActionLog              = new self();
-        $newActionLog->user_id     = Yii::$app->user->getId();
+        $newActionLog->user_id     = empty(Yii::$app->user) ? 1 : Yii::$app->user->getId(); //TODO fix user id
         $newActionLog->entity_name = $entityName;
         $newActionLog->entity_id   = $entityId;
         $newActionLog->action_type = $actionType;
